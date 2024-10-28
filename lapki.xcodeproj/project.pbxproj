@@ -6,27 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXContainerItemProxy section */
-		9126729D2CCE45B600BC72B8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9126727E2CCE45B300BC72B8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 912672852CCE45B300BC72B8;
-			remoteInfo = lapki;
-		};
-		912672A72CCE45B600BC72B8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9126727E2CCE45B300BC72B8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 912672852CCE45B300BC72B8;
-			remoteInfo = lapki;
-		};
-/* End PBXContainerItemProxy section */
+/* Begin PBXBuildFile section */
+		912F43892CCE467B001AF3C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 912F43882CCE467B001AF3C5 /* README.md */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		912672862CCE45B300BC72B8 /* lapki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lapki.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9126729C2CCE45B600BC72B8 /* lapkiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lapkiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		912672A62CCE45B600BC72B8 /* lapkiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lapkiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		912F43882CCE467B001AF3C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -48,34 +34,10 @@
 			path = lapki;
 			sourceTree = "<group>";
 		};
-		9126729F2CCE45B600BC72B8 /* lapkiTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = lapkiTests;
-			sourceTree = "<group>";
-		};
-		912672A92CCE45B600BC72B8 /* lapkiUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = lapkiUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		912672832CCE45B300BC72B8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		912672992CCE45B600BC72B8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		912672A32CCE45B600BC72B8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -89,9 +51,8 @@
 			isa = PBXGroup;
 			children = (
 				912672882CCE45B300BC72B8 /* lapki */,
-				9126729F2CCE45B600BC72B8 /* lapkiTests */,
-				912672A92CCE45B600BC72B8 /* lapkiUITests */,
 				912672872CCE45B300BC72B8 /* Products */,
+				912F43882CCE467B001AF3C5 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,8 +60,6 @@
 			isa = PBXGroup;
 			children = (
 				912672862CCE45B300BC72B8 /* lapki.app */,
-				9126729C2CCE45B600BC72B8 /* lapkiTests.xctest */,
-				912672A62CCE45B600BC72B8 /* lapkiUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,52 +89,6 @@
 			productReference = 912672862CCE45B300BC72B8 /* lapki.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9126729B2CCE45B600BC72B8 /* lapkiTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 912672B42CCE45B600BC72B8 /* Build configuration list for PBXNativeTarget "lapkiTests" */;
-			buildPhases = (
-				912672982CCE45B600BC72B8 /* Sources */,
-				912672992CCE45B600BC72B8 /* Frameworks */,
-				9126729A2CCE45B600BC72B8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9126729E2CCE45B600BC72B8 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				9126729F2CCE45B600BC72B8 /* lapkiTests */,
-			);
-			name = lapkiTests;
-			packageProductDependencies = (
-			);
-			productName = lapkiTests;
-			productReference = 9126729C2CCE45B600BC72B8 /* lapkiTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		912672A52CCE45B600BC72B8 /* lapkiUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 912672B72CCE45B600BC72B8 /* Build configuration list for PBXNativeTarget "lapkiUITests" */;
-			buildPhases = (
-				912672A22CCE45B600BC72B8 /* Sources */,
-				912672A32CCE45B600BC72B8 /* Frameworks */,
-				912672A42CCE45B600BC72B8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				912672A82CCE45B600BC72B8 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				912672A92CCE45B600BC72B8 /* lapkiUITests */,
-			);
-			name = lapkiUITests;
-			packageProductDependencies = (
-			);
-			productName = lapkiUITests;
-			productReference = 912672A62CCE45B600BC72B8 /* lapkiUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -188,14 +101,6 @@
 				TargetAttributes = {
 					912672852CCE45B300BC72B8 = {
 						CreatedOnToolsVersion = 16.0;
-					};
-					9126729B2CCE45B600BC72B8 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = 912672852CCE45B300BC72B8;
-					};
-					912672A52CCE45B600BC72B8 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = 912672852CCE45B300BC72B8;
 					};
 				};
 			};
@@ -214,8 +119,6 @@
 			projectRoot = "";
 			targets = (
 				912672852CCE45B300BC72B8 /* lapki */,
-				9126729B2CCE45B600BC72B8 /* lapkiTests */,
-				912672A52CCE45B600BC72B8 /* lapkiUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -225,20 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9126729A2CCE45B600BC72B8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		912672A42CCE45B600BC72B8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				912F43892CCE467B001AF3C5 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,34 +142,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		912672982CCE45B600BC72B8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		912672A22CCE45B600BC72B8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9126729E2CCE45B600BC72B8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 912672852CCE45B300BC72B8 /* lapki */;
-			targetProxy = 9126729D2CCE45B600BC72B8 /* PBXContainerItemProxy */;
-		};
-		912672A82CCE45B600BC72B8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 912672852CCE45B300BC72B8 /* lapki */;
-			targetProxy = 912672A72CCE45B600BC72B8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		912672B02CCE45B600BC72B8 /* Debug */ = {
@@ -294,9 +157,9 @@
 				INFOPLIST_FILE = lapki/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,9 +167,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.inTeam.lapki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -322,9 +189,9 @@
 				INFOPLIST_FILE = lapki/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,9 +199,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.inTeam.lapki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -343,6 +214,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -406,6 +278,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -457,78 +330,6 @@
 			};
 			name = Release;
 		};
-		912672B52CCE45B600BC72B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 82ZASH38NC;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.inTeam.lapkiTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lapki.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/lapki";
-			};
-			name = Debug;
-		};
-		912672B62CCE45B600BC72B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 82ZASH38NC;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.inTeam.lapkiTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lapki.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/lapki";
-			};
-			name = Release;
-		};
-		912672B82CCE45B600BC72B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 82ZASH38NC;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.inTeam.lapkiUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = lapki;
-			};
-			name = Debug;
-		};
-		912672B92CCE45B600BC72B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 82ZASH38NC;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.inTeam.lapkiUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = lapki;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -546,24 +347,6 @@
 			buildConfigurations = (
 				912672B02CCE45B600BC72B8 /* Debug */,
 				912672B12CCE45B600BC72B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		912672B42CCE45B600BC72B8 /* Build configuration list for PBXNativeTarget "lapkiTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				912672B52CCE45B600BC72B8 /* Debug */,
-				912672B62CCE45B600BC72B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		912672B72CCE45B600BC72B8 /* Build configuration list for PBXNativeTarget "lapkiUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				912672B82CCE45B600BC72B8 /* Debug */,
-				912672B92CCE45B600BC72B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
