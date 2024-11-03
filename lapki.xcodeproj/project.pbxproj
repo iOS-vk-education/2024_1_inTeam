@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		912F43892CCE467B001AF3C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 912F43882CCE467B001AF3C5 /* README.md */; };
+		9136C8B62CD8007200230E81 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9136C8B52CD8007200230E81 /* README.md */; };
 		914B6C542CD79965004149FD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 914B6C532CD79952004149FD /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		912672862CCE45B300BC72B8 /* lapki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lapki.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		912F43882CCE467B001AF3C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9136C8B52CD8007200230E81 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		914B6C532CD79952004149FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,8 +47,8 @@
 			children = (
 				912672882CCE45B300BC72B8 /* lapki */,
 				912672872CCE45B300BC72B8 /* Products */,
-				912F43882CCE467B001AF3C5 /* README.md */,
 				914B6C532CD79952004149FD /* .gitignore */,
+				9136C8B52CD8007200230E81 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,7 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				914B6C542CD79965004149FD /* .gitignore in Resources */,
-				912F43892CCE467B001AF3C5 /* README.md in Resources */,
+				9136C8B62CD8007200230E81 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
