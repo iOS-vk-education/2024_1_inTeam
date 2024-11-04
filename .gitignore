@@ -95,3 +95,6 @@ iOSInjectionProject/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 UserInterfaceState.xcuserstate
+
+
+.DS_Store
