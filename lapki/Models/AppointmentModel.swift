@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppointmentModel: Identifiable {
+struct AppointmentModel: Identifiable /*, INotifier*/ {
     let id: String = UUID().uuidString //Уникальный идентификатор
     //var place: PlaceModel //Место (заготовка)
     //var pet: PetModel //Питомец (заготовка)
@@ -16,4 +16,10 @@ struct AppointmentModel: Identifiable {
     init(date: Date) {
         self.date = date
     }
+
+/*
+    func composeNotification() -> Notification {
+        return Notification(title: "Напоминание о записи", body: "У вас назначаена запись на \(date) в \(place)", createdAt: Date.now())
+    }
+*/
 }
