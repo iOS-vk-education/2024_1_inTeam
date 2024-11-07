@@ -3,20 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		912F43892CCE467B001AF3C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 912F43882CCE467B001AF3C5 /* README.md */; };
+		9136C8B62CD8007200230E81 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9136C8B52CD8007200230E81 /* README.md */; };
+		914B6C542CD79965004149FD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 914B6C532CD79952004149FD /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		912672862CCE45B300BC72B8 /* lapki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lapki.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		912F43882CCE467B001AF3C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9136C8B52CD8007200230E81 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		914B6C532CD79952004149FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		912672AE2CCE45B600BC72B8 /* Exceptions for "lapki" folder in "lapki" target */ = {
+		912672AE2CCE45B600BC72B8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -26,14 +28,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		912672882CCE45B300BC72B8 /* lapki */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				912672AE2CCE45B600BC72B8 /* Exceptions for "lapki" folder in "lapki" target */,
-			);
-			path = lapki;
-			sourceTree = "<group>";
-		};
+		912672882CCE45B300BC72B8 /* lapki */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (912672AE2CCE45B600BC72B8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = lapki; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +47,8 @@
 			children = (
 				912672882CCE45B300BC72B8 /* lapki */,
 				912672872CCE45B300BC72B8 /* Products */,
-				912F43882CCE467B001AF3C5 /* README.md */,
+				914B6C532CD79952004149FD /* .gitignore */,
+				9136C8B52CD8007200230E81 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +101,7 @@
 				};
 			};
 			buildConfigurationList = 912672812CCE45B300BC72B8 /* Build configuration list for PBXProject "lapki" */;
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -113,7 +110,6 @@
 			);
 			mainGroup = 9126727D2CCE45B300BC72B8;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 912672872CCE45B300BC72B8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -128,7 +124,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				912F43892CCE467B001AF3C5 /* README.md in Resources */,
+				914B6C542CD79965004149FD /* .gitignore in Resources */,
+				9136C8B62CD8007200230E81 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +156,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -191,7 +188,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
