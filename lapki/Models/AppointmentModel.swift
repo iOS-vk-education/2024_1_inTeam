@@ -8,7 +8,7 @@
 import Foundation
 
 struct AppointmentModel: Identifiable {
-    let id: UUID = UUID() //Уникальный идентификатор
+    let id: String = UUID().uuidString //Уникальный идентификатор
     //var place: PlaceModel //Место (заготовка)
     //var pet: PetModel //Питомец (заготовка)
     var date: Date //Дата и время записи
