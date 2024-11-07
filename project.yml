@@ -1,0 +1,22 @@
+name: lapki
+options:
+  bundleIdPrefix: ru.inTeam
+settings:
+    SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+    SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+targets:
+  lapki:
+    type: application
+    platform: iOS
+    deploymentTarget: 16.4
+    sources:
+        - lapki
+        - README.md
+        - .gitignore
+    info:
+      path: lapki/Info.plist
+      properties:
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UILaunchStoryboardName: LaunchScreen
+    settings:
+      TARGETED_DEVICE_FAMILY: "1"
