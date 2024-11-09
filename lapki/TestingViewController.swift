@@ -14,13 +14,18 @@ class TestingViewController: UIViewController {
         view.backgroundColor = .white
         title = "Lapki function test"
         
-        let button1 = createButton(withTitle: "Notification system", action: #selector(navigateToNotif))
+        let notificationButton = createButton(withTitle: "Notification system", action: #selector(navigateToNotif))
         
-        view.addSubview(button1)
+        let userViewButton = createButton(withTitle: "User sheet view", action: #selector(navigateToUserView))
+        
+        view.addSubview(notificationButton)
+        view.addSubview(userViewButton)
         
         NSLayoutConstraint.activate([
-            button1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button1.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            notificationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            notificationButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            userViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            userViewButton.centerYAnchor.constraint(equalTo: notificationButton.bottomAnchor, constant: 40),
         ])
         
     }
@@ -42,6 +47,11 @@ class TestingViewController: UIViewController {
     
     @objc private func navigateToNotif() {
         let vc = NotifViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func navigateToUserView() {
+        let vc = UserViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
