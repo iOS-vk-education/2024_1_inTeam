@@ -10,8 +10,9 @@ import Foundation
 
 // Protocol lets any entity to access using notification system
 protocol INotifier {
+    associatedtype NotificationType: RawRepresentable where NotificationType.RawValue == String
     // Need to implement function that describes the rules that notification is being composed.
-    func composeNotification() -> Notification
+    func composeNotification(type: NotificationType) -> Notification
 }
 
 extension INotifier {
