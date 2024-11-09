@@ -28,4 +28,5 @@ Lapki – это лучшее приложение для владельцев �
 
 
 
-## [Макет в Figma](https://www.figma.com/design/LZ2HsVQMzd62u5Yyeq7uUy/LAPKI-%7C-Mobile?node-id=230-682&m=dev&t=kACKo3KBvBnVMgSx-1)
+## [Макет в Figma]
+[ссылка](https://www.figma.com/design/LZ2HsVQMzd62u5Yyeq7uUy/LAPKI-%7C-Mobile?node-id=230-682&m=dev&t=kACKo3KBvBnVMgSx-1)
