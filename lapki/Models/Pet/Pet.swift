@@ -34,12 +34,6 @@ protocol Pet: INotifier where NotificationType == PetNotificationType {
     var breed: BreedType { get set }
 }
 
-extension Pet {
-    func composeNotification() -> Notification {
-        return Notification(title: "New notification from \(name)", body: "\(name) is \(age) years old at \(Date.now)", createdAt: Date.now)
-    }
-}
-
 struct Dog: Pet {
     typealias BreedType = DogBreed
     let id: String
