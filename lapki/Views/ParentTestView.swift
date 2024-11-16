@@ -9,32 +9,42 @@ import SwiftUI
 
 struct ParentTestView: View {
     @State private var showSheet: Bool = false
-    @State private var detent = PresentationDetent.medium
+    @State private var settingsView: Bool = false
+    @State private var appointmentsView: Bool = false
     
     var body: some View {
-        ZStack {
-            Image("MainBG")
-                .resizable()
-            VStack(spacing: 16) {
-                Text("Testing UserView popover")
-                Button("Toggle UserView") {
-                    showSheet.toggle()
+        NavigationStack {
+            ZStack {
+                Image("MainBG")
+                    .resizable()
+                VStack(spacing: 16) {
+                    Text("Testing UserView popover")
+                    Button("Toggle UserView") {
+                        showSheet.toggle()
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
+                .padding()
+                .background(Material.thick)
+                .cornerRadius(16)
             }
-            .padding()
-            .background(Material.thick)
-            .cornerRadius(16)
+            .ignoresSafeArea()
+            .sheet(isPresented: $showSheet) {
+                UserView(showSheet: $showSheet, appointments: $appointmentsView, settings: $settingsView)
+            }
+            .navigationDestination(isPresented: $settingsView) {
+                SettingsView()
+                    .onDisappear {
+                        showSheet = true
+                    }
+            }
+            .navigationDestination(isPresented: $appointmentsView) {
+                AppointmentsView()
+                    .onDisappear {
+                        showSheet = true
+                    }
+            }
         }
-        .ignoresSafeArea()
-        .sheet(isPresented: $showSheet) {
-            UserSheet(showSheet: $showSheet, detent: $detent)
-                .onDisappear {
-                    detent = .medium
-                }
-                .presentationContentInteraction(.scrolls)
-        }
-        
     }
 }
 
