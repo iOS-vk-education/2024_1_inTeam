@@ -28,3 +28,11 @@ targets:
             UIWindowSceneSessionRoleApplication:
               - UISceneConfigurationName: "Default Configuration"
                 UISceneDelegateClassName: "$(PRODUCT_MODULE_NAME).SceneDelegate"
+  lapkiTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: 16.4
+    sources:
+      - lapkiTests
+    dependencies:
+      - target: lapki
