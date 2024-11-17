@@ -32,40 +32,28 @@ public struct WalkingAreaResponse: Codable {
         self.photosIds = try container.decode([PhotoItem].self, forKey: .photosIds).map { $0.photo }
         self.address = try container.decode(String.self, forKey: .address)
         
-        //TODO: ДАЛЬШЕ ГОВНОКОД!!!
-        
-        var isFencing: Bool?  = nil
-        if let fencing = try? container.decode(String.self, forKey: .fencing) {
-            switch fencing.lowercased() {
-            case "да":
-                isFencing = true
-            case "нет":
-                isFencing = false
-            default: break
-            }
-        }
-        
-        guard let isFencing else {
+        guard let fencing = try? container.decode(String.self, forKey: .fencing) else {
             throw DecodingError.dataCorruptedError(forKey: .fencing, in: container, debugDescription: "Неправильное значение для Bool")
         }
-        self.fencing = isFencing
         
-        
-        
-        var isLighting: Bool?  = nil
-        if let lighting = try? container.decode(String.self, forKey: .lighting) {
-            switch lighting.lowercased() {
-            case "да":
-                isLighting = true
-            case "нет":
-                isLighting = false
-            default: break
-            }
+        switch fencing.lowercased() {
+        case "да":
+            self.fencing = true
+        case "нет":
+            self.fencing = false
+        default: throw DecodingError.dataCorruptedError(forKey: .fencing, in: container, debugDescription: "Неправильное значение для Bool")
         }
         
-        guard let isLighting else {
+        guard let lighting = try? container.decode(String.self, forKey: .lighting) else {
             throw DecodingError.dataCorruptedError(forKey: .fencing, in: container, debugDescription: "Неправильное значение для Bool")
         }
-        self.lighting = isLighting
+        
+        self.lighting = switch lighting.lowercased() {
+            case "да":
+                true
+            case "нет":
+                false
+            default: throw DecodingError.dataCorruptedError(forKey: .fencing, in: container, debugDescription: "Неправильное значение для Bool")
+        }
     }
 }
