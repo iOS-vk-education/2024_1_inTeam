@@ -7,43 +7,49 @@
 
 import SwiftUI
 
+enum Sheet: String, Identifiable {
+    case notifications, userView
+    var id: String { rawValue }
+}
+
 struct ParentTestView: View {
+    
     @State private var showSheet: Bool = false
+    @State private var showNotifications: Bool = false
     @State private var settingsView: Bool = false
     @State private var appointmentsView: Bool = false
     
+    @State private var sheet: Sheet?
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Image("MainBG")
-                    .resizable()
-                VStack(spacing: 16) {
-                    Text("Testing UserView popover")
-                    Button("Toggle UserView") {
-                        showSheet.toggle()
-                    }
-                    .buttonStyle(.borderedProminent)
+        
+        ZStack {
+            Image("MainBG")
+            VStack(spacing: 16) {
+                Text("Testing UserView popover")
+                Button("Toggle UserView") {
+                    sheet = .userView
                 }
-                .padding()
-                .background(Material.thick)
-                .cornerRadius(16)
+                .buttonStyle(.borderedProminent)
             }
-            .ignoresSafeArea()
-            .sheet(isPresented: $showSheet) {
-                UserView(showSheet: $showSheet, appointments: $appointmentsView, settings: $settingsView)
-            }
-            .navigationDestination(isPresented: $settingsView) {
-                SettingsView()
-                    .onDisappear {
-                        showSheet = true
-                    }
-            }
-            .navigationDestination(isPresented: $appointmentsView) {
-                AppointmentsView()
-                    .onDisappear {
-                        showSheet = true
-                    }
-            }
+            .padding()
+            .background(Material.thick)
+            .cornerRadius(16)
+        }
+        .ignoresSafeArea()
+        .sheet(item: $sheet, content: makeSheet)
+    }
+    
+    @ViewBuilder
+    func makeSheet(_ sheet: Sheet) -> some View {
+        switch sheet {
+        case .userView:
+            UserView(showSheet: $showSheet, sheet: $sheet, appointments: $appointmentsView, settings: $settingsView)
+        case .notifications:
+            NotificationsView()
+                .onDisappear {
+                    self.sheet = .userView
+                }
         }
     }
 }

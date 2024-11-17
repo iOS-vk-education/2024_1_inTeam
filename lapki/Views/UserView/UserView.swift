@@ -9,9 +9,11 @@ import SwiftUI
 
 struct UserView: View {
     @Binding var showSheet: Bool
+    @Binding var sheet: Sheet?
     @State private var showNotifications: Bool = false
     @Binding var appointments: Bool
     @Binding var settings: Bool
+    @State private var showSettings = false
     @State private var detent: PresentationDetent = .medium
     @State private var lastDetent: PresentationDetent = .medium
     
@@ -21,6 +23,8 @@ struct UserView: View {
         HStack() {
             HStack {
                 Image(systemName: "person.circle")
+                    .resizable()
+                    .frame(width: 24, height: 24)
                 VStack(alignment: .leading) {
                     Text("Максим Лейхнер")
                         .font(.headline)
@@ -70,7 +74,10 @@ struct UserView: View {
                 VStack(spacing: 20) {
                     Button {
                         showSheet = false
-                        settings = true
+                        settings.toggle()
+                        withAnimation {
+                            showSettings.toggle()
+                        }
                     } label: {
                         HStack {
                             Image(systemName: "gear")
@@ -85,9 +92,11 @@ struct UserView: View {
                         .background(Material.thinMaterial.opacity(0.6))
                         .background(Color("ButtonBackground"))
                         .cornerRadius(24)
+                        .matchedGeometryEffect(id: "settings", in: transitionElements)
                     }
                     Button {
                         showNotifications.toggle()
+                        sheet = .notifications
                     } label: {
                         HStack {
                             Image(systemName: "bell")
@@ -107,7 +116,6 @@ struct UserView: View {
             }
             .padding(.horizontal, 24)
             .shadow(color: .black.opacity(0.1), radius: 7)
-            //.frame(maxWidth: .infinity, maxHeight: 130)
             .padding(.top, 20)
             
             HStack(alignment: .center) {
@@ -133,28 +141,20 @@ struct UserView: View {
             }
             .padding(.horizontal, 24)
             Spacer()
-            
         }
-        
-        //.padding(.top, 60)
         .scrollIndicators(.hidden)
         .presentationDetents([.medium, .height(700)],
                              selection: $detent)
         .presentationCornerRadius(48)
-        .presentationBackground(.regularMaterial)
+        .presentationBackground(.thinMaterial)
         .presentationDragIndicator(.hidden)
-        .sheet(isPresented: $showNotifications) {
-            NotificationsView()
-                .onAppear {
-                    lastDetent = detent
-                }
-                .onDisappear {
-                    detent = lastDetent
-                }
+        .fullScreenCover(isPresented: $showSettings) {
+            SettingsView()
+                .background(Color.clear)
         }
     }
 }
 
 #Preview {
-    UserView(showSheet: Binding<Bool>(get: { true }, set: { _ in }), appointments: Binding<Bool>(get: { false }, set: { _ in }), settings: Binding<Bool>(get: { false }, set: { _ in }))
+    UserView(showSheet: Binding<Bool>(get: { true }, set: { _ in }), sheet: .constant(.notifications), appointments: Binding<Bool>(get: { false }, set: { _ in }), settings: Binding<Bool>(get: { false }, set: { _ in }))
 }

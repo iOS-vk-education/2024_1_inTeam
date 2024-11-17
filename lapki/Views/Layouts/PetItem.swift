@@ -9,22 +9,20 @@ import SwiftUI
 
 struct PetItem: View {
     var body: some View {
-        NavigationLink(destination: PetView()) {
-            HStack {
-                Image(systemName: "cat.circle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 40)
-                VStack(alignment: .leading) {
-                    Text("Барсик")
-                        .font(.headline)
-                    Text("4 года, дворняга")
-                        .font(.callout)
-                        .foregroundStyle(.gray)
-                }
-                Spacer()
-                Image(systemName: "chevron.right")
+        HStack {
+            Image(systemName: "cat.circle")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 40)
+            VStack(alignment: .leading) {
+                Text("Барсик")
+                    .font(.headline)
+                Text("4 года, дворняга")
+                    .font(.callout)
+                    .foregroundStyle(.gray)
             }
+            Spacer()
+            Image(systemName: "chevron.right")
         }
     }
 }
