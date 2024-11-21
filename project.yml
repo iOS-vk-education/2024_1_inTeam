@@ -27,3 +27,11 @@ targets:
         SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
         SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
         TARGETED_DEVICE_FAMILY: "1"
+  lapkiTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: 16.4
+    sources:
+      - lapkiTests
+    dependencies:
+      - target: lapki
