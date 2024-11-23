@@ -8,153 +8,46 @@
 import SwiftUI
 
 struct UserView: View {
-    @Binding var showSheet: Bool
-    @Binding var sheet: Sheet?
-    @State private var showNotifications: Bool = false
-    @Binding var appointments: Bool
-    @Binding var settings: Bool
-    @State private var showSettings = false
     @State private var detent: PresentationDetent = .medium
-    @State private var lastDetent: PresentationDetent = .medium
-    
-    @Namespace var transitionElements
+    @State private var showAppointments: Bool = false
+    @State private var showSettings: Bool = false
+    @State private var showNotifications: Bool = false
+    @State private var showProfile: Bool = false
     
     var body: some View {
-        HStack() {
-            HStack {
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                VStack(alignment: .leading) {
-                    Text("Максим Лейхнер")
-                        .font(.headline)
-                        .fontDesign(.rounded)
-                        .fontWeight(.bold)
-                    Text("Ваш аккаунт")
-                        .font(.footnote)
-                        .fontDesign(.rounded)
-                }
-            }
-            Spacer()
-            Button {
-                showSheet = false
-            } label: {
-                Image(systemName: "xmark")
-                    .font(.subheadline)
-                    .foregroundStyle(.foreground)
-                    .padding(6)
-                    .background(Color(.systemGray4))
-                    .clipShape(Circle())
-            }
-        }
-        .padding(.top, 24)
-        .padding(.bottom, 16)
-        .padding(.horizontal, 24)
-        
-        ScrollView {
-            HStack(spacing: 5) {
-                Button {
-                    showSheet = false
-                    appointments = true
-                } label: {
-                    VStack(alignment: .leading) {
-                        Image(systemName: "pencil.and.list.clipboard")
-                            .font(.title2)
-                        Text("Мои записи")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                    }
-                    .foregroundStyle(.foreground)
-                    .fontWeight(.medium)
-                    .padding()
-                    .background(Material.thinMaterial.opacity(0.6))
-                    .background(Color("ButtonBackground"))
-                    .cornerRadius(24)
-                }
-                Spacer()
-                VStack(spacing: 20) {
-                    Button {
-                        showSheet = false
-                        settings.toggle()
-                        withAnimation {
-                            showSettings.toggle()
-                        }
-                    } label: {
-                        HStack {
-                            Image(systemName: "gear")
-                                .font(.title2)
-                            Text("Настройки")
-                                .font(.subheadline)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        }
-                        .foregroundStyle(.foreground)
-                        .fontWeight(.medium)
-                        .padding()
-                        .background(Material.thinMaterial.opacity(0.6))
-                        .background(Color("ButtonBackground"))
-                        .cornerRadius(24)
-                        .matchedGeometryEffect(id: "settings", in: transitionElements)
-                    }
-                    Button {
-                        showNotifications.toggle()
-                        sheet = .notifications
-                    } label: {
-                        HStack {
-                            Image(systemName: "bell")
-                                .font(.title2)
-                            Text("Уведомления")
-                                .font(.subheadline)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        }
-                        .foregroundStyle(.foreground)
-                        .fontWeight(.medium)
-                        .padding()
-                        .background(Material.thinMaterial.opacity(0.6))
-                        .background(Color("ButtonBackground"))
-                        .cornerRadius(24)
-                    }
-                }
-            }
-            .padding(.horizontal, 24)
-            .shadow(color: .black.opacity(0.1), radius: 7)
-            .padding(.top, 20)
+        VStack {
+            UserHeaderView(showUserProfileView: $showProfile)
+                .padding(20)
             
-            HStack(alignment: .center) {
-                Text("Питомцы")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .fontDesign(.rounded)
-                Spacer()
-                Button {
-                    
-                } label: {
-                    Text("Добавить")
-                    Image(systemName: "plus")
-                }
-                .foregroundStyle(.foreground)
+            ScrollView {
+                UserButtonGroupView(showAppointments: $showAppointments, showSettings: $showSettings, showNotifications: $showNotifications)
+                    .padding(.vertical, 18)
+                    .padding(.horizontal, 24)
+                
+                PetListView()
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 20)
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 20)
-            ForEach(0..<25) { _ in
-                PetItem()
-                    .padding(.vertical, 10)
-                    .foregroundStyle(.foreground)
-            }
-            .padding(.horizontal, 24)
-            Spacer()
+            .scrollIndicators(.hidden)
         }
-        .scrollIndicators(.hidden)
+        .presentationCornerRadius(48)
+        .presentationBackground(Color.Paws.Background.background)
+        .presentationDragIndicator(.hidden)
         .presentationDetents([.medium, .height(700)],
                              selection: $detent)
-        .presentationCornerRadius(48)
-        .presentationBackground(.thinMaterial)
-        .presentationDragIndicator(.hidden)
-        .fullScreenCover(isPresented: $showSettings) {
-            SettingsView()
-                .background(Color.clear)
+        .sheet(isPresented: $showNotifications) {
+            NotificationsView()
         }
+        // Could change to fullScreenCover(item, content)
+        .fullScreenCover(isPresented: $showAppointments, content: { AppointmentsView() })
+        .fullScreenCover(isPresented: $showSettings, content: { SettingsView() })
+        .fullScreenCover(isPresented: $showProfile, content: {
+            UserProfileView()
+        })
     }
+    
 }
 
 #Preview {
-    UserView(showSheet: Binding<Bool>(get: { true }, set: { _ in }), sheet: .constant(.notifications), appointments: Binding<Bool>(get: { false }, set: { _ in }), settings: Binding<Bool>(get: { false }, set: { _ in }))
+    UserView()
 }

@@ -9,37 +9,74 @@ import SwiftUI
 
 struct AppointmentsView: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var showMore: Bool = false
     
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack {
-                    Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-                }
-                .navigationTitle("Мои записи")
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        HStack {
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "xmark.circle")
-                                    .foregroundStyle(.foreground)
+                VStack(spacing: 36) {
+                    VStack(spacing: 18) {
+                        ForEach(AppointmentManager.shared.MOCK_APPOINTMENTS) { appointment in
+                            AppointmentRowView(appointment: appointment)
+                            AppointmentRowView(appointment: appointment)
+                        }
+                        if showMore {
+                            ForEach(AppointmentManager.shared.MOCK_APPOINTMENTS) { appointment in
+                                AppointmentRowView(appointment: appointment)
+                                AppointmentRowView(appointment: appointment)
                             }
                         }
-                    }
-                    ToolbarTitleMenu {
                         Button {
-                            
+                            withAnimation() {
+                                showMore.toggle()
+                            }
                         } label: {
-                            Text("bebra")
-                                .foregroundStyle(.foreground)
+                            HStack {
+                                if showMore {
+                                    Text("Скрыть")
+                                    Image(systemName: "chevron.up")
+                                } else {
+                                    Text("Еще 7")
+                                    Image(systemName: "chevron.down")
+                                }
+                            }
+                        }
+                        .foregroundStyle(Color.Paws.Constant.uiAccent)
+                    }
+                    
+                    VStack(spacing: 18) {
+                        HStack {
+                            Text("Прошедшие записи")
+                            Spacer()
+                        }
+                        .foregroundStyle(Color.Paws.Text.secondaryLabel)
+                        ForEach(AppointmentManager.shared.MOCK_APPOINTMENTS) { appointment in
+                            AppointmentRowView(appointment: appointment)
+                            
                         }
                     }
                 }
+                .padding(.top, 24)
+                .padding(.horizontal)
             }
+            .navigationTitle("Мои записи")
+            .navigationBarTitleDisplayMode(.large)
+            .presentationBackground(Color.Paws.Background.background)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                            Text("Назад")
+                        }
+                    }
+                    .foregroundStyle(Color.Paws.Constant.uiAccent)
+                }
+            }
+            .toolbarBackground(Material.thinMaterial, for: .navigationBar)
         }
-        
     }
 }
 

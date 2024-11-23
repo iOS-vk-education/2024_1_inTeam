@@ -18,11 +18,11 @@ extension Color {
         }
         
         enum Constant {
-            static let black = Color("Paws/Background/Constant/Black")
-            static let secondaryBlack = Color("Paws/Background/Constant/SecondaryBlack")
-            static let secondaryWhite = Color("Paws/Background/Constant/SecondaryWhite")
-            static let uiAccent = Color("Paws/Background/Constant/UIAccent")
-            static let white = Color("Paws/Background/Constant/White")
+            static let black = Color("Paws/Constant/Black")
+            static let secondaryBlack = Color("Paws/Constant/SecondaryBlack")
+            static let secondaryWhite = Color("Paws/Constant/SecondaryWhite")
+            static let uiAccent = Color("Paws/Constant/UIAccent")
+            static let white = Color("Paws/Constant/White")
         }
         
         enum Text {

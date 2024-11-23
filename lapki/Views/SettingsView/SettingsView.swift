@@ -9,56 +9,76 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var offset: CGFloat = 0
-    @State private var scale: CGFloat = 1.0
+    @State private var systemNotifications: Bool = false
+    @State private var internalNotifications: Bool = false
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .fill(Color.white) // Белый прямоугольник
-            .shadow(radius: 10)
-            .overlay(
-                NavigationView {
-                    VStack {
-                        Text("Hello, World!")
+        NavigationStack {
+            VStack {
+                List {
+                    Section {
+                        Toggle(isOn: $systemNotifications) {
+                            Text("Системные уведомления")
+                                .foregroundStyle(Color.Paws.Text.label)
+                        }
+                        Toggle(isOn: $internalNotifications) {
+                            Text("Внутренние уведомления")
+                                .foregroundStyle(Color.Paws.Text.label)
+                        }
+                    } header: {
+                        Text("Уведомления")
+                            .foregroundStyle(Color.Paws.Text.secondarySubhead)
                     }
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "xmark.circle")
+                    .listRowBackground(Color.Paws.Background.elevatedContainerBG)
+                    .foregroundStyle(Color.Paws.Text.label)
+                    
+                    Section {
+                        NavigationLink {
+                            // Navigate
+                        } label: {
+                            HStack {
+                                Text("О приложении")
+                                Spacer()
+                                Text("Версия 0.69")
+                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
                             }
                         }
+                        NavigationLink {
+                            // Navigate
+                        } label: {
+                            Text("Справка")
+                        }
+                        NavigationLink {
+                            // Navigate
+                        } label: {
+                            Text("Предложить фичу")
+                        }
+                    } header: {
+                        Text("Помощь и обратная связь")
+                            .foregroundStyle(Color.Paws.Text.secondarySubhead)
                     }
-                    .navigationTitle("Настройки")
-                    .navigationBarTitleDisplayMode(.large)
+                    .listRowBackground(Color.Paws.Background.elevatedContainerBG)
+                    .foregroundStyle(Color.Paws.Text.label)
                 }
-                    .background(Color.clear)
-            )
-            .offset(y: offset) // Применяем смещение к всему NavigationView
-            .scaleEffect(scale) // Масштабирование окна
-            .gesture(
-                DragGesture()
-                    .onChanged { gesture in
-                        // Изменяем offset и scale в зависимости от высоты свайпа
-                        if gesture.translation.height > 0 {
-                            offset = gesture.translation.height
-                            scale = 1 - (gesture.translation.height / 1000) // Плавное уменьшение
-                        }
+                .background(Color.Paws.Background.background)
+                .scrollContentBackground(.hidden)
+            }
+            .navigationTitle("Настройки")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                        Text("Назад")
                     }
-                    .onEnded { gesture in
-                        if gesture.translation.height > 200 { // Условие закрытия
-                            dismiss()
-                        } else {
-                            withAnimation(.spring()) {
-                                offset = 0
-                                scale = 1.0 // Возвращаем в исходное состояние
-                            }
-                        }
-                    }
-            )
-            .ignoresSafeArea()
-            .presentationBackground(Color.clear)
+                    .foregroundStyle(Color.Paws.Constant.uiAccent)
+                }
+            }
+            .toolbarBackground(Material.thinMaterial, for: .navigationBar)
+        }
+        .presentationBackground(Color.Paws.Background.background)
     }
 }
 

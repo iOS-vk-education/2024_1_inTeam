@@ -33,6 +33,7 @@ struct NotificationItemView: View {
         .padding(16)
         .background(Color.Paws.Background.elevatedContainerBG)
         .cornerRadius(24)
+        .shadow(color: .black.opacity(0.1), radius: 10)
     }
 }
 

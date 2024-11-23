@@ -26,15 +26,21 @@ struct AppointmentRowView: View {
             }
             
             VStack(alignment: .leading) {
-                Text("<Place_name>")
+                Text("Красногвардейская ВЛ")
                     .font(.headline)
-                Text("\(appointment.date.formatted(.dateTime))")
-                    .font(.callout)
-                    .foregroundStyle(.gray)
+                HStack(spacing: 16) {
+                    Text("\(appointment.pet.name)")
+                    Text("\(appointment.date.formatted(.dateTime))")
+                }
+                .font(.callout)
+                .foregroundStyle(.gray)
             }
             Spacer()
         }
-        .background(Color("Paws 1/bebra"))
+        .padding()
+        .background(Color.Paws.Background.elevatedContainerBG)
+        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .shadow(color: .black.opacity(0.1), radius: 10)
     }
 }
 

@@ -9,34 +9,36 @@ import SwiftUI
 
 struct NotificationsView: View {
     var body: some View {
-        VStack() {
-            NavigationStack {
-                HStack(alignment: .center) {
-                    Text("Уведомления")
-                        .fontDesign(.rounded)
-                        .font(.largeTitle)
-                        .bold()
-                    Spacer()
-                    Button {
-                        
-                    } label: {
-                        Text("Очистить")
-                            .foregroundStyle(.foreground)
+        HStack(alignment: .center) {
+            Text("Уведомления")
+                .fontDesign(.rounded)
+                .font(.largeTitle)
+                .bold()
+            Spacer()
+            Button {
+                // Clear
+            } label: {
+                Text("Очистить")
+                    .foregroundStyle(.foreground)
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 24)
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 18) {
+                    ForEach(1..<5) { _ in
+                        NotificationItemView()
                     }
                 }
-                .padding(.horizontal, 24)
-                ForEach(1..<5) { _ in
-                    NotificationButton()
-                }
-                .padding(.horizontal, 24)
+                .padding(24)
                 Spacer()
             }
-            .padding(.top, 20)
         }
         .presentationDetents([.medium, .height(700)], selection: .constant(.medium))
         .presentationCornerRadius(48)
         .presentationDragIndicator(.hidden)
-        .presentationBackground(.regularMaterial)
+        .presentationBackground(Color.Paws.Background.background)
     }
 }
 

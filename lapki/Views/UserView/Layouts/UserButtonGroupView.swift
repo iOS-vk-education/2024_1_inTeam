@@ -31,6 +31,7 @@ struct UserButtonGroupView: View {
                                 .padding()
                             }
                             .frame(height: 136)
+                            .shadow(color: .black.opacity(0.1), radius: 10)
                     }
                 VStack(spacing: 20) {
                     Button {
@@ -51,6 +52,7 @@ struct UserButtonGroupView: View {
                                 .foregroundStyle(Color.Paws.Text.label)
                                 .padding()
                             }
+                            .shadow(color: .black.opacity(0.1), radius: 10)
                         
                     }
                     Button {
@@ -69,6 +71,7 @@ struct UserButtonGroupView: View {
                                 .foregroundStyle(Color.Paws.Text.label)
                                 .padding()
                             }
+                            .shadow(color: .black.opacity(0.1), radius: 10)
                     }
                 }
             }

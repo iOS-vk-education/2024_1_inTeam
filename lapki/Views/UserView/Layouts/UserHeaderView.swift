@@ -9,22 +9,29 @@ import SwiftUI
 
 struct UserHeaderView: View {
     @Environment(\.dismiss) var dismiss
+    @Binding var showUserProfileView: Bool
+    
     var body: some View {
         HStack() {
-            HStack {
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                VStack(alignment: .leading) {
-                    Text("Максим Лейхнер")
-                        .font(.headline)
-                        .fontDesign(.rounded)
-                        .fontWeight(.bold)
-                        .foregroundStyle(Color.Paws.Text.label)
-                    Text("Ваш аккаунт")
-                        .font(.footnote)
-                        .fontDesign(.rounded)
-                        .foregroundStyle(Color.Paws.Text.secondaryLabel)
+            Button {
+                showUserProfileView.toggle()
+            } label: {
+                HStack {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .foregroundStyle(Color.Paws.Constant.uiAccent)
+                    VStack(alignment: .leading) {
+                        Text("Максим Лейхнер")
+                            .font(.headline)
+                            .fontDesign(.rounded)
+                            .fontWeight(.bold)
+                            .foregroundStyle(Color.Paws.Text.label)
+                        Text("Ваш аккаунт")
+                            .font(.footnote)
+                            .fontDesign(.rounded)
+                            .foregroundStyle(Color.Paws.Text.secondaryLabel)
+                    }
                 }
             }
             Spacer()
@@ -43,5 +50,5 @@ struct UserHeaderView: View {
 }
 
 #Preview {
-    UserHeaderView()
+    UserHeaderView(showUserProfileView: Binding<Bool>(get: { false }, set: { _ in }))
 }
