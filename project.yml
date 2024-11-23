@@ -1,6 +1,7 @@
 name: lapki
 options:
   bundleIdPrefix: ru.inTeam
+  postGenCommand: pod install
 settings:
   base:
     SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
@@ -28,6 +29,7 @@ targets:
             UIWindowSceneSessionRoleApplication:
               - UISceneConfigurationName: "Default Configuration"
                 UISceneDelegateClassName: "$(PRODUCT_MODULE_NAME).SceneDelegate"
+        NSLocationUsageDescription: "Чтобы находить места рядом с вами"
   lapkiTests:
     type: bundle.unit-test
     platform: iOS
