@@ -35,7 +35,6 @@ protocol Pet: INotifier where NotificationType == PetNotificationType {
 }
 
 struct Dog: Pet {
-    typealias BreedType = DogBreed
     let id: String
     var name: String
     var age: Int
@@ -43,7 +42,6 @@ struct Dog: Pet {
 }
 
 struct Cat: Pet {
-    typealias BreedType = CatBreed
     let id: String
     var name: String
     var age: Int
