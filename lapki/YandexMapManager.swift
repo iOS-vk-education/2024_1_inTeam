@@ -15,8 +15,7 @@ class YandexMapManager: NSObject, ObservableObject {
     @Published var cameraBounds: MapCameraBounds? = nil
     @Published var cameraMoving: Bool = false
     
-    var onCameraStops: () -> Void = {}
-    var onCameraMoves: () -> Void = {}
+    private var delegate: YandexMapManagerDelegate? = nil
     
     let mapView: YMKMapView = YMKMapView(frame: .zero)
     private lazy var map: YMKMap = {
@@ -52,7 +51,7 @@ class YandexMapManager: NSObject, ObservableObject {
                 latitude: userLocation.coordinate.latitude,
                 longitude: userLocation.coordinate.longitude
             ),
-            zoom: 15,
+            zoom: 10,
             azimuth: 0,
             tilt: 0
         )
@@ -66,14 +65,18 @@ class YandexMapManager: NSObject, ObservableObject {
         )
     }
     
-    private func setCameraMovingState(_ moving: Bool) {
-        if self.cameraMoving == true && moving == false {
-            onCameraStops()
-        } else if self.cameraMoving == false && moving == true {
-            onCameraStops()
+    private func setCameraMovingState(_ newState: Bool) {
+        if self.cameraMoving && !newState {
+            delegate?.onCameraStoppedMoving(with: map)
+        } else if !self.cameraMoving && newState {
+            delegate?.onCameraStartedMoving(with: map)
         }
         
-        self.cameraMoving = moving
+        self.cameraMoving = newState
+    }
+    
+    func setDelegate(_ delegate: YandexMapManagerDelegate) {
+        self.delegate = delegate
     }
 }
 

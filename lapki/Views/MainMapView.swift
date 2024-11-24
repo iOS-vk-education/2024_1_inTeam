@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MapTestView: View {
+struct MainMapView: View {
     @ObservedObject var mapManager = YandexMapManager()
     
     var body: some View {
@@ -26,5 +26,5 @@ struct MapTestView: View {
 }
 
 #Preview {
-    MapTestView()
+    MainMapView()
 }
