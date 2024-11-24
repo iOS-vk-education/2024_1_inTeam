@@ -46,13 +46,18 @@ extension UNUserNotificationCenter: NotificationService {
         sendLocalNotification(title: notification.title, body: notification.body)
     }
     
-    func authorize() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+    func authorize() async -> NotificationService? {
+        do {
+            let success = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
             if success {
-                NotificationCenter.shared.addSystemService(UNUserNotificationCenter.current())
+                return UNUserNotificationCenter.current() as NotificationService
             } else {
-                print("Failed to request authorization")
+                print("Authorization denied")
+                return nil
             }
+        } catch {
+            print("Failed to request authorization: \(error.localizedDescription)")
+            return nil
         }
     }
     

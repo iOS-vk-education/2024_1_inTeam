@@ -12,7 +12,7 @@ struct UserHeaderView: View {
     @Binding var showUserProfileView: Bool
     
     var body: some View {
-        HStack() {
+        HStack(alignment: .top) {
             Button {
                 showUserProfileView.toggle()
             } label: {

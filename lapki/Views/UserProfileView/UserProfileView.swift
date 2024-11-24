@@ -24,36 +24,52 @@ struct UserProfileView: View {
                         NavigationLink {
                             // Navigate
                         } label: {
-                            Text("Изменить пароль")
+                            HStack {
+                                Text("Изменить пароль")
+                                    .foregroundStyle(Color.Paws.Text.label)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                            }
                         }
-                        Toggle(isOn: $internalNotifications) {
-                            Text("Внутренние уведомления")
-                                .foregroundStyle(Color.Paws.Text.label)
+                        NavigationLink {
+                            // Navigate
+                        } label: {
+                            HStack {
+                                Text("Двухфакторная авторизация")
+                                    .foregroundStyle(Color.Paws.Text.label)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                            }
                         }
                     }
+                    .padding(.horizontal, 12)
                     
                     SectionView(header: "ДАННЫЕ") {
                         NavigationLink {
                             // Navigate
                         } label: {
                             HStack {
-                                Text("О приложении")
+                                Text("Редактировать профиль")
+                                    .foregroundStyle(Color.Paws.Text.label)
                                 Spacer()
-                                Text("Версия 0.69")
+                                Image(systemName: "chevron.right")
                                     .foregroundStyle(Color.Paws.Text.secondarySubhead)
                             }
                         }
                         NavigationLink {
                             
                         } label: {
-                            Text("Справка")
-                        }
-                        NavigationLink {
-                            
-                        } label: {
-                            Text("Предложить фичу")
+                            HStack {
+                                Text("Удалить профиль")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                            }
+                            .foregroundStyle(Color.red)
                         }
                     }
+                    .padding(.horizontal, 12)
                 }
             }
             .navigationTitle("Ваш аккаунт")
@@ -72,37 +88,6 @@ struct UserProfileView: View {
             .toolbarBackground(Material.thinMaterial, for: .navigationBar)
         }
         .presentationBackground(Color.Paws.Background.background)
-    }
-}
-
-struct SectionView<Content: View>: View {
-    var header: String
-    var content: Content
-    
-    init(header: String, @ViewBuilder content: () -> Content) {
-        self.header = header
-        self.content = content()
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(header)
-                .font(.subheadline)
-                .foregroundStyle(Color.Paws.Text.secondarySubhead)
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
-            VStack(spacing: 0) {
-                content
-                    .padding(.horizontal, 16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.vertical, 12)
-            }
-            .foregroundStyle(Color.Paws.Text.label)
-            .background(Color.Paws.Background.elevatedContainerBG)
-            .cornerRadius(12)
-            .padding(.horizontal, 16)
-            .padding(.bottom, 16)
-        }
     }
 }
 

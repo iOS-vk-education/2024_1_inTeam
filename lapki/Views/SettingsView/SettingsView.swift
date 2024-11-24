@@ -9,60 +9,80 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var systemNotifications: Bool = false
-    @State private var internalNotifications: Bool = false
+    @ObservedObject private var viewModel = SettingsViewModel()
     
     var body: some View {
         NavigationStack {
-            VStack {
-                List {
-                    Section {
-                        Toggle(isOn: $systemNotifications) {
-                            Text("Системные уведомления")
-                                .foregroundStyle(Color.Paws.Text.label)
-                        }
-                        Toggle(isOn: $internalNotifications) {
-                            Text("Внутренние уведомления")
-                                .foregroundStyle(Color.Paws.Text.label)
-                        }
-                    } header: {
-                        Text("Уведомления")
-                            .foregroundStyle(Color.Paws.Text.secondarySubhead)
+            ScrollView {
+                SectionView(header: "УВЕДОМЛЕНИЯ") {
+                    Toggle(isOn: $viewModel.systemNotifications) {
+                        Text("Системные уведомления")
+                            .foregroundStyle(Color.Paws.Text.label)
                     }
-                    .listRowBackground(Color.Paws.Background.elevatedContainerBG)
-                    .foregroundStyle(Color.Paws.Text.label)
-                    
-                    Section {
-                        NavigationLink {
-                            // Navigate
-                        } label: {
-                            HStack {
-                                Text("О приложении")
-                                Spacer()
-                                Text("Версия 0.69")
-                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
-                            }
+                    .alert("Уведомления запрещены", isPresented: $viewModel.onFailure) {
+                        Button("Открыть настройки", role: .cancel) {
+                            openAppSettings()
                         }
-                        NavigationLink {
-                            // Navigate
-                        } label: {
-                            Text("Справка")
-                        }
-                        NavigationLink {
-                            // Navigate
-                        } label: {
-                            Text("Предложить фичу")
-                        }
-                    } header: {
-                        Text("Помощь и обратная связь")
-                            .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                    } message: {
+                        Text("Разрешите уведомления в настройках")
                     }
-                    .listRowBackground(Color.Paws.Background.elevatedContainerBG)
-                    .foregroundStyle(Color.Paws.Text.label)
+                    .onChange(of: viewModel.systemNotifications) { newValue in
+                        viewModel.toggleSystemNotifications()
+                    }
+                    Toggle(isOn: $viewModel.internalNotifications) {
+                        Text("Внутренние уведомления")
+                            .foregroundStyle(Color.Paws.Text.label)
+                    }
                 }
-                .background(Color.Paws.Background.background)
-                .scrollContentBackground(.hidden)
+                
+                SectionView(header: "ПОМОЩЬ И ОБРАТНАЯ СВЯЗЬ") {
+                    NavigationLink {
+                        // Navigate
+                    } label: {
+                        HStack {
+                            Text("О приложении")
+                                .foregroundStyle(Color.Paws.Text.label)
+                            Spacer()
+                            Text("Версия 0.69")
+                                .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                        }
+                    }
+                    NavigationLink {
+                        // Navigate
+                    } label: {
+                        HStack {
+                            Text("Справка")
+                                .foregroundStyle(Color.Paws.Text.label)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                        }
+                    }
+                    NavigationLink {
+                        // Navigate
+                    } label: {
+                        HStack {
+                            Text("Предложить фичу")
+                                .foregroundStyle(Color.Paws.Text.label)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                        }
+                    }
+                }
+#if DEBUG
+                SectionView(header: "DEBUG") {
+                    NavigationLink {
+                        NotifViewControllerRepresentable()
+                    } label: {
+                        Text("Тестирование уведомлений")
+                    }
+                }
+#endif
             }
+            .padding(.horizontal, 16)
             .navigationTitle("Настройки")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
@@ -80,6 +100,13 @@ struct SettingsView: View {
         }
         .presentationBackground(Color.Paws.Background.background)
     }
+    
+    private func openAppSettings() {
+        if let appSettingsURL = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(appSettingsURL, options: [:], completionHandler: nil)
+        }
+    }
+    
 }
 
 #Preview {
