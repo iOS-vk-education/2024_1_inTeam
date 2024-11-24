@@ -8,6 +8,11 @@
 import Foundation
 import UserNotifications
 
+enum supportedServices: String {
+    case inApp
+    case system
+}
+
 // Any notification service must conform to protocol
 // in order to recieve notifications from
 // notification center.

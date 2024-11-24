@@ -77,9 +77,9 @@ class NotifViewController: UIViewController {
     }
 
     @objc private func callNotification() {
-//        Example usage of INotifier and pushing notification to Notification Center
-//        let notification = Cat.MOCK_CAT.composeNotification()
-//        Cat.MOCK_CAT.pushNotification(notification)
+        // Example usage of INotifier and pushing notification to Notification Center
+        let notification = Cat.MOCK_CAT.composeNotification(type: .foodEnds)
+        Cat.MOCK_CAT.pushNotification(notification)
         
         notificationTextView.text = InAppService.shared.activeNotification?.body ?? "No new notifications"
     }

@@ -11,8 +11,10 @@ import UserNotifications
 // This is the heart of notification system in this application.
 // Holds all incoming notifications and pushing them to
 // notification services that are user subscribed to.
-struct NotificationCenter {
+class NotificationCenter {
     static var shared: NotificationCenter = NotificationCenter()
+    
+    private init() {}
     
     private(set) var notifications: [Notification] = []
     private(set) var services: [NotificationService] = []
@@ -20,7 +22,7 @@ struct NotificationCenter {
     private var systemService: NotificationService?
     private var inAppService: NotificationService?
     
-    mutating func newNotification(_ notification: Notification) {
+    func newNotification(_ notification: Notification) {
         notifications.append(notification)
         print("New notification in Notification center: \(notification)")
         
@@ -32,43 +34,39 @@ struct NotificationCenter {
         }
     }
     
-    mutating func addSystemService(_ service: NotificationService) {
-        //print("Added to Notification center: \(service)")
+    func addSystemService(_ service: NotificationService) {
         systemService = service
     }
     
-    mutating func addInAppService(_ service: NotificationService) {
-        //print("Added to Notification center: \(service)")
+    func addInAppService(_ service: NotificationService) {
         inAppService = service
     }
     
-    mutating func removeSystemService() {
-        //print("Unsubsribed from system notifications")
+    func removeSystemService() {
         systemService = nil
     }
     
-    mutating func removeInAppService() {
-        //print("Unsubsribed from in-app notifications")
+    func removeInAppService() {
         inAppService = nil
     }
     
     func saveSubscriptions() {
         var subscribedServices: [String] = []
         if systemService != nil {
-            subscribedServices.append("systemService")
+            subscribedServices.append(supportedServices.system.rawValue)
         }
         if inAppService != nil {
-            subscribedServices.append("inAppService")
+            subscribedServices.append(supportedServices.inApp.rawValue)
         }
         UserDefaults.standard.set(subscribedServices, forKey: "subscribedServices")
     }
     
-    mutating func loadSubscriptions() {
+    func loadSubscriptions() {
         let subscribedServices = UserDefaults.standard.array(forKey: "subscribedServices") as? [String] ?? []
-        if subscribedServices.contains("systemService") {
+        if subscribedServices.contains(supportedServices.system.rawValue) {
             self.systemService = UNUserNotificationCenter.current() as NotificationService
         }
-        if subscribedServices.contains("inAppService") {
+        if subscribedServices.contains(supportedServices.inApp.rawValue) {
             self.inAppService = InAppService.shared
         }
     }

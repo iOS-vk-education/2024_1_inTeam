@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum PetNotificationType: String, CaseIterable {
     case isHungry
@@ -14,40 +15,41 @@ enum PetNotificationType: String, CaseIterable {
 }
 
 enum CatBreed: String, CaseIterable {
-    case siamese
-    case persian
-    case bengal
+    case siamese = "Сиамский"
+    case persian = "Персидский"
+    case bengal = "Бенгальский"
 }
 
 enum DogBreed: String, CaseIterable {
-    case goldenRetriever
-    case labradorRetriever
-    case goldenDoodle
+    case goldenRetriever = "Ретривер"
+    case labradorRetriever = "Лабрадор"
+    case goldenDoodle = "Дудлингер"
 }
 
-protocol Pet: INotifier where NotificationType == PetNotificationType {
+protocol Pet: Identifiable, INotifier where NotificationType == PetNotificationType {
     associatedtype BreedType: RawRepresentable where BreedType.RawValue == String
     
     var id: String { get }
     var name: String { get set }
     var age: Int { get set }
     var breed: BreedType { get set }
+    var imageURL: String? { get set }
 }
 
 struct Dog: Pet {
-    typealias BreedType = DogBreed
     let id: String
     var name: String
     var age: Int
     var breed: DogBreed
+    var imageURL: String?
 }
 
 struct Cat: Pet {
-    typealias BreedType = CatBreed
     let id: String
     var name: String
     var age: Int
     var breed: CatBreed
+    var imageURL: String?
 }
 
 extension Pet {
@@ -65,9 +67,9 @@ extension Pet {
 }
 
 extension Cat {
-    static var MOCK_CAT = Cat(id: "0", name: "Barsik", age: 10, breed: .bengal)
+    static var MOCK_CAT = Cat(id: UUID.init().uuidString, name: "Барсик", age: 10, breed: .bengal)
 }
 
 extension Dog {
-    static var MOCK_DOG = Dog(id: "0", name: "Rex", age: 10, breed: .labradorRetriever)
+    static var MOCK_DOG = Dog(id: UUID.init().uuidString, name: "Рэкс", age: 10, breed: .labradorRetriever)
 }

@@ -13,7 +13,7 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let swiftUIView = ParentTestView()
+        let swiftUIView = ParentView()
         let hostingController = UIHostingController(rootView: swiftUIView)
         
         addChild(hostingController)
