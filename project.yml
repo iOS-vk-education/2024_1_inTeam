@@ -1,6 +1,13 @@
 name: lapki
 options:
   bundleIdPrefix: ru.inTeam
+  postGenCommand: pod install
+settings:
+  base:
+    SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+    SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+    TARGETED_DEVICE_FAMILY: "1"
+    PRODUCT_BUNDLE_IDENTIFIER: $(BUNDLE_ID_PREFIX).$(TARGET_NAME)
 targets:
   lapki:
     type: application
@@ -22,13 +29,7 @@ targets:
             UIWindowSceneSessionRoleApplication:
               - UISceneConfigurationName: "Default Configuration"
                 UISceneDelegateClassName: "$(PRODUCT_MODULE_NAME).SceneDelegate"
-    settings:
-      base:
-        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
-        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
-        TARGETED_DEVICE_FAMILY: "1"
-    dependencies:
-      - package: Glur
+        NSLocationUsageDescription: "Чтобы находить места рядом с вами"
   lapkiTests:
     type: bundle.unit-test
     platform: iOS
