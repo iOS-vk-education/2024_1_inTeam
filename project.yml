@@ -27,6 +27,8 @@ targets:
         SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
         SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
         TARGETED_DEVICE_FAMILY: "1"
+    dependencies:
+      - package: Glur
   lapkiTests:
     type: bundle.unit-test
     platform: iOS
@@ -35,3 +37,7 @@ targets:
       - lapkiTests
     dependencies:
       - target: lapki
+packages:
+  Glur:
+    url: https://github.com/joogps/Glur.git
+    version: 1.0.4

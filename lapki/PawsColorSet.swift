@@ -38,5 +38,12 @@ extension Color {
             static let purple = Color("Paws/Shadow/Purple")
             static let yellow = Color("Paws/Shadow/Yellow")
         }
+        
+        enum Content {
+            static let yellow = Color("Paws/Content/Yellow")
+            static let purple = Color("Paws/Content/Purple")
+            static let pink = Color("Paws/Content/Pink")
+            static let green = Color("Paws/Content/Green")
+        }
     }
 }
