@@ -20,5 +20,5 @@ protocol Place {
 }
 
 extension WalkingAreaModel {
-    static var MOCK_WalkingAreaModel = WalkingAreaModel(isFavourite: false, id: 12564, name: "Красногвардейская ветеринарная лечебница", type: PlaceType.walkingArea, address: "ул. Пушкина, дом Колотушкина, 7", photosId: ["MOCK_WalkingAreaModel", "MOCK_WalkingAreaModel"])
+    static var MOCK_WalkingAreaModel = WalkingAreaModel(isFavourite: false, id: 12564, name: "Красногвардейская ветеринарная лечебница", type: PlaceType.walkingArea, address: "ул. Пушкина, дом Колотушкина, 7", photosId: ["TestClinic", "TestClinic"])
 }

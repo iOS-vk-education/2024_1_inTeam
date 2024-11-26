@@ -108,7 +108,7 @@ struct PlaceView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: 47)
                     .padding(.horizontal)
-                    .background(Color("Green"))
+                    .background(Color.Paws.Constant.uiAccent)
                     .cornerRadius(9)
                 }
                 
@@ -120,8 +120,8 @@ struct PlaceView: View {
                         .padding(.all, 12)
                         .scaledToFit()
                         .frame(width: 47, height: 47)
-                        .background(Color("lightGreen"))
-                        .foregroundColor(Color("Green"))
+                        .background(Color.Paws.Background.buttonBackground)
+                        .foregroundColor(Color.Paws.Constant.uiAccent)
                         .cornerRadius(9)
                 }
                 Button(action: {
@@ -132,8 +132,8 @@ struct PlaceView: View {
                         .padding(.all, 12)
                         .scaledToFit()
                         .frame(width: 47, height: 47)
-                        .background(Color("lightGreen"))
-                        .foregroundColor(Color("Green"))
+                        .background(Color.Paws.Background.buttonBackground)
+                        .foregroundColor(Color.Paws.Constant.uiAccent)
                         .cornerRadius(9)
                 }
                 Button(action: {
@@ -144,8 +144,8 @@ struct PlaceView: View {
                         .padding(.all, 10)
                         .scaledToFit()
                         .frame(width: 47, height: 47)
-                        .background(Color("lightGreen"))
-                        .foregroundColor(Color("Green"))
+                        .background(Color.Paws.Background.buttonBackground)
+                        .foregroundColor(Color.Paws.Constant.uiAccent)
                         .cornerRadius(9)
                 }
             }
@@ -153,8 +153,4 @@ struct PlaceView: View {
             .background(Color(UIColor.systemBackground).shadow(radius: 4))
         }
     }
-}
-
-#Preview {
-    PlaceView(place: WalkingAreaModel.MOCK_WalkingAreaModel)
 }
