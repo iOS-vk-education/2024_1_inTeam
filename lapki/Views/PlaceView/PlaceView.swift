@@ -89,7 +89,7 @@ struct PlaceView: View {
             }
             .padding(.vertical)
         }
-        .background(Color(UIColor.systemBackground))
+        .background(Color.Paws.Background.background)
         .safeAreaInset(edge: .bottom) {
             // Footer Buttons
             HStack(spacing: 16) {
@@ -150,7 +150,12 @@ struct PlaceView: View {
                 }
             }
             .padding()
-            .background(Color(UIColor.systemBackground).shadow(radius: 4))
+            .background{
+                Rectangle()
+                    .fill(Color.Paws.Background.background)
+                    .shadow(radius: 8)
+            }
+            .cornerRadius(24)
         }
     }
 }

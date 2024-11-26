@@ -90,7 +90,3 @@ struct UserProfileView: View {
         .presentationBackground(Color.Paws.Background.background)
     }
 }
-
-#Preview {
-    UserProfileView()
-}

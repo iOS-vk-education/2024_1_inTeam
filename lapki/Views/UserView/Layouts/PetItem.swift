@@ -12,10 +12,23 @@ struct PetItem: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "cat.circle")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 52)
+            if let petImage = pet.imageURL {
+                Image(petImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 52, height: 52)
+                    .clipShape(Circle())
+                    .overlay {
+                        Circle()
+                            .stroke(Color.Paws.Background.background, lineWidth: 3)
+                    }
+                    .shadow(color: Color.black.opacity(0.1), radius: 12)
+            } else {
+                Image(systemName: "cat.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 52)
+            }
             VStack(alignment: .leading) {
                 Text(pet.name)
                     .font(.headline)
@@ -29,8 +42,4 @@ struct PetItem: View {
                 .foregroundStyle(Color.Paws.Text.secondaryLabel)
         }
     }
-}
-
-#Preview {
-    PetItem(pet: PetManager.shared.MOCK_PETS[0])
 }

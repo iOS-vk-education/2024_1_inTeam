@@ -22,8 +22,8 @@ struct UserHeaderView: View {
                 HStack {
                     Image("sample")
                         .resizable()
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 48, height: 48)
-                        .scaledToFill()
                         .clipShape(Circle())
                         .overlay {
                             Circle()
@@ -32,7 +32,7 @@ struct UserHeaderView: View {
                         .shadow(color: Color.black.opacity(0.1), radius: 12)
                         //.matchedGeometryEffect(id: "userIcon", in: userIconAnimation)
                     VStack(alignment: .leading) {
-                        Text("Максим Лейхнер")
+                        Text("Константин Кулаков")
                             .font(.headline)
                             .fontDesign(.rounded)
                             .fontWeight(.bold)

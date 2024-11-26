@@ -18,6 +18,7 @@ enum CatBreed: String, CaseIterable {
     case siamese = "Сиамский"
     case persian = "Персидский"
     case bengal = "Бенгальский"
+    case epic = "Эпический"
 }
 
 enum DogBreed: String, CaseIterable {
@@ -67,7 +68,7 @@ extension Pet {
 }
 
 extension Cat {
-    static var MOCK_CAT = Cat(id: UUID.init().uuidString, name: "Барсик", age: 10, breed: .bengal)
+    static var MOCK_CAT = Cat(id: UUID.init().uuidString, name: "Мухамед", age: 10, breed: .epic, imageURL: "muhamed")
 }
 
 extension Dog {

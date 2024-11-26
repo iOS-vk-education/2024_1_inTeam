@@ -38,7 +38,3 @@ struct PetListView: View {
         }
     }
 }
-
-#Preview {
-    PetListView()
-}

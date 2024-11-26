@@ -15,12 +15,12 @@ struct UserProfileHeaderView: View {
                 .frame(width: 64, height: 64)
                 .clipShape(Circle())
             VStack(alignment: .leading) {
-                Text("Максим Лейхнер")
+                Text("Константин Кулаков")
                     .font(.title2)
                     .fontWeight(.bold)
                     .fontDesign(.rounded)
                     .foregroundStyle(Color.Paws.Text.label)
-                Text("maxim.makarenkov@gmail.com")
+                Text("megabebra420@gmail.com")
                     .font(.subheadline)
                     .foregroundStyle(Color.Paws.Text.secondaryLabel)
             }
