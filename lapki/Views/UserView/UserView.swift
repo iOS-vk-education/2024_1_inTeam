@@ -13,20 +13,24 @@ struct UserView: View {
     @State private var showSettings: Bool = false
     @State private var showNotifications: Bool = false
     @State private var showProfile: Bool = false
+    @GestureState var isDragging: Bool = false
     
     var body: some View {
         VStack {
             UserHeaderView(showUserProfileView: $showProfile)
                 .padding(20)
+                .allowsHitTesting(!isDragging)
             
             ScrollView {
                 UserButtonGroupView(showAppointments: $showAppointments, showSettings: $showSettings, showNotifications: $showNotifications)
                     .padding(.vertical, 18)
                     .padding(.horizontal, 24)
+                    .allowsHitTesting(!isDragging)
                 
                 PetListView()
                     .padding(.horizontal, 24)
                     .padding(.vertical, 20)
+                    .allowsHitTesting(!isDragging)
             }
             .scrollIndicators(.hidden)
         }
@@ -44,10 +48,15 @@ struct UserView: View {
         .fullScreenCover(isPresented: $showProfile, content: {
             UserProfileView()
         })
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .updating($isDragging) { _, state, _ in
+                    state = true
+                }
+        )
     }
-    
 }
 
-#Preview {
-    UserView()
-}
+//#Preview {
+//    UserView()
+//}

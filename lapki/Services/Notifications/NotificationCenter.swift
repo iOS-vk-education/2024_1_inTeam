@@ -14,13 +14,20 @@ import UserNotifications
 class NotificationCenter {
     static var shared: NotificationCenter = NotificationCenter()
     
-    private init() {}
+    private init() {
+        Task {
+            let _ = await checkSystemNotificationStatus()
+        }
+    }
     
     private(set) var notifications: [Notification] = []
-    private(set) var services: [NotificationService] = []
     
-    private var systemService: NotificationService?
-    private var inAppService: NotificationService?
+    private(set) var systemService: NotificationService?
+    private(set) var inAppService: NotificationService?
+    
+    func clearNotifications() {
+        notifications.removeAll()
+    }
     
     func newNotification(_ notification: Notification) {
         notifications.append(notification)
@@ -34,20 +41,36 @@ class NotificationCenter {
         }
     }
     
-    func addSystemService(_ service: NotificationService) {
-        systemService = service
+    func checkSystemNotificationStatus() async -> Bool {
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        let isAuthorized = settings.authorizationStatus == .authorized
+        DispatchQueue.main.async {
+            self.systemService = isAuthorized ? UNUserNotificationCenter.current() : nil
+        }
+        return isAuthorized
     }
     
-    func addInAppService(_ service: NotificationService) {
-        inAppService = service
+    func addSystemService() async -> Bool {
+        let service = await UNUserNotificationCenter.current().authorize()
+        if let service {
+            self.systemService = service
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func addInAppService() {
+        let service = InAppService.shared
+        self.inAppService = service
     }
     
     func removeSystemService() {
-        systemService = nil
+        self.systemService = nil
     }
     
     func removeInAppService() {
-        inAppService = nil
+        self.inAppService = nil
     }
     
     func saveSubscriptions() {
