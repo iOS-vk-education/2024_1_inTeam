@@ -9,6 +9,10 @@ import SwiftUI
 import Glur
 
 struct PlaceCardView: View {
+    var place: Place
+    var onCardTap: (() -> Void)? = nil
+    var onActionButtonTap: (() -> Void)? = nil
+    
     var body: some View {
         Rectangle()
             .fill(Color.clear)
@@ -34,7 +38,7 @@ struct PlaceCardView: View {
                                     .font(.system(size: 24))
                             }
                         VStack(alignment: .leading) {
-                            Text("Красногвардейская ВЛ")
+                            Text(place.name)
                                 .font(.system(size: 20, weight: .medium, design: .rounded))
                                 .lineLimit(1)
                                 .foregroundStyle(Color.Paws.Constant.white)
@@ -44,7 +48,7 @@ struct PlaceCardView: View {
                                 .foregroundStyle(Color.Paws.Constant.secondaryWhite)
                         }
                         Spacer(minLength: 0)
-                        Button(action: {}) {
+                        Button(action: { onActionButtonTap?() }) {
                             Image(systemName: "phone")
                                 .font(.system(size: 24, weight: .regular))
                                 .tint(Color.Paws.Constant.white)
@@ -57,12 +61,8 @@ struct PlaceCardView: View {
             .clipped()
             .cornerRadius(12)
             .onTapGesture {
-                print("Tap")
+                onCardTap?()
             }
     }
 }
 
-#Preview {
-    PlaceCardView()
-        .padding(20)
-}

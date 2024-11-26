@@ -17,6 +17,8 @@ targets:
       - lapki
     resources:
       - path: "lapki/Assets.xcassets"
+    dependencies:
+      - package: Glur
     info:
       path: lapki/Info.plist
       properties:
@@ -30,6 +32,8 @@ targets:
               - UISceneConfigurationName: "Default Configuration"
                 UISceneDelegateClassName: "$(PRODUCT_MODULE_NAME).SceneDelegate"
         NSLocationUsageDescription: "Чтобы находить места рядом с вами"
+        UIAppFonts:
+          - "Moloko.otf"
   lapkiTests:
     type: bundle.unit-test
     platform: iOS

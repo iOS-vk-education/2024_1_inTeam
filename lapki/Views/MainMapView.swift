@@ -12,7 +12,6 @@ struct MainMapView: View {
     @State var showUserSheet: Bool = false
     
     var body: some View {
-        
         ZStack(alignment: .topLeading) {
             HStack {
                 Button {
@@ -52,8 +51,4 @@ struct MainMapView: View {
             UserView()
         }
     }
-}
-
-#Preview {
-    MainMapView()
 }
