@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NotificationItemView: View {
+    var notifiaction: Notification
+    
     var body: some View {
         HStack(alignment: .top, spacing: 6) {
             Image(systemName: "cat.circle")
@@ -38,5 +40,5 @@ struct NotificationItemView: View {
 }
 
 #Preview {
-    NotificationItemView()
+    NotificationItemView(notifiaction: Notification(title: "Тестовое уведомление", body: "Это тестовое уведомление", createdAt: Date.now))
 }

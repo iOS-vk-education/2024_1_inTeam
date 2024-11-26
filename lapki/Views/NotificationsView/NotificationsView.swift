@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NotificationsView: View {
+    @StateObject var viewModel = NotificationViewModel()
+    
     var body: some View {
         HStack(alignment: .center) {
             Text("Уведомления")
@@ -16,7 +18,9 @@ struct NotificationsView: View {
                 .bold()
             Spacer()
             Button {
-                // Clear
+                withAnimation() {
+                    viewModel.clear()
+                }
             } label: {
                 Text("Очистить")
                     .foregroundStyle(.foreground)
@@ -27,8 +31,8 @@ struct NotificationsView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 18) {
-                    ForEach(1..<5) { _ in
-                        NotificationItemView()
+                    ForEach(viewModel.notifications) { notification in
+                        NotificationItemView(notifiaction: notification)
                     }
                 }
                 .padding(24)

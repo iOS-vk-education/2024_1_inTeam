@@ -10,17 +10,27 @@ import SwiftUI
 struct UserHeaderView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var showUserProfileView: Bool
+    //var userIconAnimation: Namespace.ID
     
     var body: some View {
-        HStack() {
+        HStack(alignment: .top) {
             Button {
-                showUserProfileView.toggle()
+                withAnimation(.spring) {
+                    showUserProfileView.toggle()
+                }
             } label: {
                 HStack {
-                    Image(systemName: "person.circle")
+                    Image("sample")
                         .resizable()
-                        .frame(width: 50, height: 50)
-                        .foregroundStyle(Color.Paws.Constant.uiAccent)
+                        .frame(width: 48, height: 48)
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .overlay {
+                            Circle()
+                                .stroke(Color.Paws.Background.background, lineWidth: 3)
+                        }
+                        .shadow(color: Color.black.opacity(0.1), radius: 12)
+                        //.matchedGeometryEffect(id: "userIcon", in: userIconAnimation)
                     VStack(alignment: .leading) {
                         Text("Максим Лейхнер")
                             .font(.headline)
@@ -49,6 +59,6 @@ struct UserHeaderView: View {
     }
 }
 
-#Preview {
-    UserHeaderView(showUserProfileView: Binding<Bool>(get: { false }, set: { _ in }))
-}
+//#Preview {
+//    UserHeaderView(showUserProfileView: Binding<Bool>(get: { false }, set: { _ in }))
+//}

@@ -11,7 +11,8 @@ import Foundation
 // for Notification center.
 // Any entity conforming INotifier must compose
 // notifications relying on this template.
-struct Notification {
+struct Notification: Identifiable {
+    let id: String = UUID().uuidString
     let title: String
     let body: String
     let createdAt: Date
