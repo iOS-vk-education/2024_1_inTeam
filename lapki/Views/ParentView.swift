@@ -9,30 +9,19 @@ import SwiftUI
 
 struct ParentView: View {
     
-    @State private var showUserView: Bool = false
+    @Binding var showUserView: Bool
     
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                VStack(spacing: 16) {
-                    Text("Testing UserView popover")
-                    Button("Toggle UserView") {
-                        showUserView.toggle()
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                .padding()
-                .background(Material.thick)
-                .cornerRadius(16)
-                .sheet(isPresented: $showUserView) {
-                    UserView()
-                }
-            }
+        ZStack {
+            Color.clear
+        }
+        .sheet(isPresented: $showUserView) {
+            UserView()
         }
     }
 }
 
-#Preview {
-    ParentView()
-}
+//#Preview {
+//    ParentView()
+//}

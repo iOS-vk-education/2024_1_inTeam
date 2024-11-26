@@ -9,18 +9,36 @@ import SwiftUI
 
 struct MainMapView: View {
     @ObservedObject var mapManager = YandexMapManager()
+    @State var showUserSheet: Bool = false
     
     var body: some View {
-        ZStack {
+        
+        ZStack(alignment: .topLeading) {
+            HStack {
+                Button {
+                    showUserSheet = true
+                } label: {
+                    Image("sample")
+                        .resizable()
+                        .frame(width: 48, height: 48)
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .overlay {
+                            Circle()
+                                .stroke(Color.Paws.Background.background, lineWidth: 3)
+                        }
+                        .shadow(color: Color.black.opacity(0.1), radius: 12)
+                }
+                Text("Лапки")
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding()
+            .zIndex(1)
             YandexMapView()
                 .edgesIgnoringSafeArea(.all)
                 .environmentObject(mapManager)
-            VStack {
-                Button("Move to User") {
-                    mapManager.moveMapToUserLocation()
-                }
-                Text("Camera Moves: \(mapManager.cameraMoving)")
-            }
+            ParentView(showUserView: $showUserSheet)
+                .zIndex(2)
         }
     }
 }
