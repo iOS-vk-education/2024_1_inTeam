@@ -1,6 +1,7 @@
 name: lapki
 options:
   bundleIdPrefix: ru.inTeam
+  postGenCommand: pod install
 settings:
   base:
     SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
@@ -16,6 +17,8 @@ targets:
       - lapki
     resources:
       - path: "lapki/Assets.xcassets"
+    dependencies:
+      - package: Glur
     info:
       path: lapki/Info.plist
       properties:
@@ -28,6 +31,9 @@ targets:
             UIWindowSceneSessionRoleApplication:
               - UISceneConfigurationName: "Default Configuration"
                 UISceneDelegateClassName: "$(PRODUCT_MODULE_NAME).SceneDelegate"
+        NSLocationUsageDescription: "Чтобы находить места рядом с вами"
+        UIAppFonts:
+          - "Moloko.otf"
   lapkiTests:
     type: bundle.unit-test
     platform: iOS
@@ -36,3 +42,7 @@ targets:
       - lapkiTests
     dependencies:
       - target: lapki
+packages:
+  Glur:
+    url: https://github.com/joogps/Glur.git
+    version: 1.0.4

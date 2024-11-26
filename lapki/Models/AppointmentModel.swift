@@ -19,6 +19,7 @@ struct AppointmentModel: Identifiable, INotifier {
     var place: any Place //Место
     var pet: any Pet //Питомец
     var date: Date //Дата и время записи
+    var pet: any Pet //Питомец (заготовка)
     
     init(place: Place, pet: any Pet, date: Date) {
         self.place = place

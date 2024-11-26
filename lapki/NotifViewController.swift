@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class NotifViewController: UIViewController {
     private let notificationTextView: UITextView = {
@@ -48,7 +49,6 @@ class NotifViewController: UIViewController {
             notificationTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             notificationTextView.heightAnchor.constraint(equalToConstant: 100),
             
-            // Констрейнты для stackView
             stackView.topAnchor.constraint(equalTo: notificationTextView.bottomAnchor, constant: 20),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -69,17 +69,17 @@ class NotifViewController: UIViewController {
     }
 
     @objc private func subscribeInApp() {
-        NotificationCenter.shared.addInAppService(InAppService.shared)
+        NotificationCenter.shared.addInAppService()
     }
 
-    @objc private func subscribeSystem() {
-        UNUserNotificationCenter.current().authorize()
+    @objc private func subscribeSystem() async {
+        let _ = await NotificationCenter.shared.addSystemService()
     }
 
     @objc private func callNotification() {
-//        Example usage of INotifier and pushing notification to Notification Center
-//        let notification = Cat.MOCK_CAT.composeNotification()
-//        Cat.MOCK_CAT.pushNotification(notification)
+        // Example usage of INotifier and pushing notification to Notification Center
+        let notification = Cat.MOCK_CAT.composeNotification(type: .foodEnds)
+        Cat.MOCK_CAT.pushNotification(notification)
         
         notificationTextView.text = InAppService.shared.activeNotification?.body ?? "No new notifications"
     }
@@ -91,4 +91,12 @@ class NotifViewController: UIViewController {
     @objc private func systemUnsub() {
         NotificationCenter.shared.removeSystemService()
     }
+}
+
+struct NotifViewControllerRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> NotifViewController {
+        .init()
+    }
+    
+    func updateUIViewController(_ uiViewController: NotifViewController, context: Context) {}
 }
