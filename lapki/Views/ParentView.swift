@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ParentView: View {
-    
     @Binding var showUserView: Bool
-    
+    var userIconAnimation: Namespace.ID
     
     var body: some View {
         ZStack {

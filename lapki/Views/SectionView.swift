@@ -37,6 +37,7 @@ struct SectionView<Content: View>: View {
             .background(Color.Paws.Background.elevatedContainerBG)
             .cornerRadius(24)
         }
+        .shadow(color: Color.black.opacity(0.1), radius: 5)
     }
 }
 

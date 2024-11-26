@@ -19,7 +19,7 @@ struct SettingsView: View {
                         Text("Системные уведомления")
                             .foregroundStyle(Color.Paws.Text.label)
                     }
-                    .alert("Уведомления запрещены", isPresented: $viewModel.onFailure) {
+                    .alert("Уведомления запрещены системой", isPresented: $viewModel.onFailure) {
                         Button("Открыть настройки", role: .cancel) {
                             openAppSettings()
                         }
@@ -34,6 +34,7 @@ struct SettingsView: View {
                             .foregroundStyle(Color.Paws.Text.label)
                     }
                 }
+                .padding(.horizontal, 16)
                 
                 SectionView(header: "ПОМОЩЬ И ОБРАТНАЯ СВЯЗЬ") {
                     NavigationLink {
@@ -72,6 +73,7 @@ struct SettingsView: View {
                         }
                     }
                 }
+                .padding(.horizontal, 16)
 #if DEBUG
                 SectionView(header: "DEBUG") {
                     NavigationLink {
@@ -80,9 +82,9 @@ struct SettingsView: View {
                         Text("Тестирование уведомлений")
                     }
                 }
+                .padding(.horizontal, 16)
 #endif
             }
-            .padding(.horizontal, 16)
             .navigationTitle("Настройки")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {

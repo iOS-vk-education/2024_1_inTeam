@@ -16,7 +16,9 @@ struct MainMapView: View {
         ZStack(alignment: .topLeading) {
             HStack {
                 Button {
-                    showUserSheet = true
+                    withAnimation(.smooth(duration: 0.1)) {
+                        showUserSheet.toggle()
+                    }
                 } label: {
                     Image("sample")
                         .resizable()
@@ -28,8 +30,16 @@ struct MainMapView: View {
                                 .stroke(Color.Paws.Background.background, lineWidth: 3)
                         }
                         .shadow(color: Color.black.opacity(0.1), radius: 12)
+                    //.matchedGeometryEffect(id: "userIcon", in: userIconAnimation)
                 }
+                .opacity(showUserSheet ? 0 : 1)
+                Spacer()
                 Text("Лапки")
+                    .font(.custom("Moloko", size: 64))
+                Spacer()
+                Rectangle()
+                    .fill(Color.clear)
+                    .frame(width: 48, height: 48)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .padding()
@@ -37,8 +47,9 @@ struct MainMapView: View {
             YandexMapView()
                 .edgesIgnoringSafeArea(.all)
                 .environmentObject(mapManager)
-            ParentView(showUserView: $showUserSheet)
-                .zIndex(2)
+        }
+        .sheet(isPresented: $showUserSheet){
+            UserView()
         }
     }
 }
