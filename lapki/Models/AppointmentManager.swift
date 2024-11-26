@@ -13,7 +13,7 @@ class AppointmentManager {
     private init() {}
     
     var MOCK_APPOINTMENTS: [AppointmentModel] = [
-        AppointmentModel(date: Date(timeIntervalSince1970: 167654), pet: Dog.MOCK_DOG),
-        AppointmentModel(date: Date(timeIntervalSince1970: 167654), pet: Cat.MOCK_CAT),
+        AppointmentModel(place: WalkingAreaModel.MOCK_WalkingAreaModel, pet: Dog.MOCK_DOG, date: Date(timeIntervalSince1970: 167654)),
+        AppointmentModel(place: WalkingAreaModel.MOCK_WalkingAreaModel, pet: Cat.MOCK_CAT, date: Date(timeIntervalSince1970: 167654)),
     ]
 }

@@ -9,50 +9,50 @@ import SwiftUI
 
 struct PlaceView: View {
     var place: any Place
+    @State var selectedPhoto = 0
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 
                 Text(place.name)
-                    .font(Font.custom("SF Pro Rounded", size: 24))
                     .fontWeight(.bold)
                     .padding(.horizontal)
-                
+                    .font(.system(size: 24, weight: .heavy, design: .rounded))
                 
                 HStack {
                     Text("Ветеринарное учреждение") //place.type (нужно что-то сделать с тайпом для вывода имени тайпа)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 14, design: .rounded))
+                        .foregroundColor(.black)
                     Spacer()
                     Menu { //не хватает часов работы
                         Text("Часы работы: 8:00 - 22:00")
                     } label: {
                         Text("Открыто до 22:00")
-                            .font(.subheadline)
-                            .foregroundColor(.green)
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(.black)
                         Image(systemName: "chevron.down")
-                            .foregroundColor(.green)
+                            .foregroundColor(.black)
                             .padding(.leading, -5)
                     }
-
+                    
                 }
                 .padding(.horizontal)
                 
                 // Image Carousel
-                TabView {
+                TabView(selection: $selectedPhoto) {
                     ForEach(place.photosId, id: \.self) { photoName in
                         Image(photoName)
                             .resizable()
                             .scaledToFill()
-                            .frame(height: 200)
+                            .frame(height: 273)
                             .clipped()
                             .cornerRadius(8)
                             .padding(.horizontal)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                .frame(height: 220)
+                .tabViewStyle(.page(indexDisplayMode: .always))
+                .frame(height: 273)
                 
                 // Address and Phone
                 VStack(alignment: .leading, spacing: 8) {
@@ -61,25 +61,31 @@ struct PlaceView: View {
                             .foregroundColor(.black)
                         VStack (alignment: .leading) {
                             Text("Адрес")
+                                .fontWeight(.medium)
+                                .padding(.bottom, 2)
                             Text(place.address)
                         }
                     }
+                    .padding(.bottom, 8)
                     HStack(alignment: .top) {
                         Image(systemName: "phone")
                             .foregroundColor(.black)
                         VStack (alignment: .leading) {
                             Text("Телефон")
-                            Text("+7 495 432 23 54") //не хватает номера в модели
+                                .fontWeight(.medium)
+                                .padding(.bottom, 2)
+                            Text("+7 495 432 23 54") //не хватает номера телефона в модели
                         }
                     }
                 }
                 .font(.subheadline)
                 .padding(.horizontal)
+                .padding(.bottom)
                 
                 // Description
-                Text("Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии") //не хватает дескрипшна в модели
-                .font(.body)
-                .padding(.horizontal)
+                Text("Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.") //не хватает дескрипшна в модели
+                    .font(.body)
+                    .padding(.horizontal)
             }
             .padding(.vertical)
         }
@@ -90,39 +96,57 @@ struct PlaceView: View {
                 Button(action: {
                     // Route action
                 }) {
-                    Text("Маршрут")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                    HStack {
+                        Text("Маршрут")
+                            .foregroundColor(.white)
+                        Image(systemName: "point.bottomleft.forward.to.arrowtriangle.uturn.scurvepath")
+                            .resizable()
+                            .padding(.vertical, 12)
+                            .scaledToFit()
+                        //                            .frame(width: 47, height: 47)
+                            .foregroundColor(.white)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 47)
+                    .padding(.horizontal)
+                    .background(Color("Green"))
+                    .cornerRadius(9)
                 }
+                
                 Button(action: {
                     // Call action
                 }) {
-                    Image(systemName: "phone.fill")
-                        .frame(width: 48, height: 48)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(24)
+                    Image(systemName: "phone.arrow.up.right")
+                        .resizable()
+                        .padding(.all, 12)
+                        .scaledToFit()
+                        .frame(width: 47, height: 47)
+                        .background(Color("lightGreen"))
+                        .foregroundColor(Color("Green"))
+                        .cornerRadius(9)
                 }
                 Button(action: {
                     // Web action
                 }) {
                     Image(systemName: "globe")
-                        .frame(width: 48, height: 48)
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                        .resizable()
+                        .padding(.all, 12)
+                        .scaledToFit()
+                        .frame(width: 47, height: 47)
+                        .background(Color("lightGreen"))
+                        .foregroundColor(Color("Green"))
+                        .cornerRadius(9)
                 }
                 Button(action: {
-                    // Additional action
+                    // Add appointment action
                 }) {
-                    Image(systemName: "plus")
-                        .frame(width: 48, height: 48)
-                        .background(Color.gray)
-                        .foregroundColor(.white)
-                        .cornerRadius(24)
+                    Image(systemName: "calendar.badge.plus")
+                        .resizable()
+                        .padding(.all, 10)
+                        .scaledToFit()
+                        .frame(width: 47, height: 47)
+                        .background(Color("lightGreen"))
+                        .foregroundColor(Color("Green"))
+                        .cornerRadius(9)
                 }
             }
             .padding()
