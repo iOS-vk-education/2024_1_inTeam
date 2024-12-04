@@ -47,20 +47,5 @@ struct MainMapView: View {
                 .edgesIgnoringSafeArea(.all)
                 .environmentObject(mapManager)
         }
-//        .sheet(isPresented: $showUserSheet){
-//            UserView()
-//        }
-//        .sheet(isPresented: $showCardTEMPORARY) {
-//            PlaceCardView(place: WalkingAreaModel.MOCK_WalkingAreaModel, onCardTap: {
-//                showCardTEMPORARY.toggle()
-//                showPlaceTEMPORARY.toggle()
-//            })
-//            .padding(20)
-//            .presentationDetents([.height(300)])
-//            .presentationBackgroundInteraction(.enabled)
-//            .presentationBackground(Color.Paws.Background.background)
-////            .interactiveDismissDisabled()
-//            .presentationCornerRadius(48)
-//        }
     }
 }
