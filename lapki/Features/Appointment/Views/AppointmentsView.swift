@@ -16,12 +16,12 @@ struct AppointmentsView: View {
             ScrollView {
                 VStack(spacing: 36) {
                     VStack(spacing: 18) {
-                        ForEach(AppointmentManager.shared.MOCK_APPOINTMENTS) { appointment in
+                        ForEach(AppointmentModel.MOCK_APPOINTMENTS) { appointment in
                             AppointmentRowView(appointment: appointment)
                             AppointmentRowView(appointment: appointment)
                         }
                         if showMore {
-                            ForEach(AppointmentManager.shared.MOCK_APPOINTMENTS) { appointment in
+                            ForEach(AppointmentModel.MOCK_APPOINTMENTS) { appointment in
                                 AppointmentRowView(appointment: appointment)
                                 AppointmentRowView(appointment: appointment)
                             }
@@ -50,7 +50,7 @@ struct AppointmentsView: View {
                             Spacer()
                         }
                         .foregroundStyle(Color.Paws.Text.secondaryLabel)
-                        ForEach(AppointmentManager.shared.MOCK_APPOINTMENTS) { appointment in
+                        ForEach(AppointmentModel.MOCK_APPOINTMENTS) { appointment in
                             AppointmentRowView(appointment: appointment)
                             
                         }
@@ -78,8 +78,4 @@ struct AppointmentsView: View {
             .toolbarBackground(Material.thinMaterial, for: .navigationBar)
         }
     }
-}
-
-#Preview {
-    AppointmentsView()
 }

@@ -24,7 +24,7 @@ struct PetItem: View {
                     }
                     .shadow(color: Color.black.opacity(0.1), radius: 12)
             } else {
-                Image(systemName: "cat.circle")
+                Image(systemName: "pawprint.circle.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(height: 52)

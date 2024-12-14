@@ -33,3 +33,10 @@ struct AppointmentModel: Identifiable, INotifier {
         }
     }
 }
+
+extension AppointmentModel {
+    static var MOCK_APPOINTMENTS: [AppointmentModel] = [
+        AppointmentModel(place: WalkingAreaModel.MOCK_WalkingAreaModel, pet: Pet.MOCK_DOG, date: Date(timeIntervalSince1970: 167654)),
+        AppointmentModel(place: WalkingAreaModel.MOCK_WalkingAreaModel, pet: Pet.MOCK_CAT, date: Date(timeIntervalSince1970: 167654)),
+    ]
+}

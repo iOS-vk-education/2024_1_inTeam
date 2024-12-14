@@ -33,7 +33,3 @@ struct UserProfileHeaderView: View {
 
     }
 }
-
-#Preview {
-    UserProfileHeaderView()
-}

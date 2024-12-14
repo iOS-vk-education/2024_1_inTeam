@@ -79,7 +79,3 @@ struct UserButtonGroupView: View {
         }
     }
 }
-
-#Preview {
-    UserButtonGroupView(showAppointments: Binding<Bool>(get: { false }, set: { _ in }), showSettings: Binding<Bool>(get: { false }, set: { _ in }), showNotifications: Binding<Bool>(get: { false }, set: { _ in }))
-}

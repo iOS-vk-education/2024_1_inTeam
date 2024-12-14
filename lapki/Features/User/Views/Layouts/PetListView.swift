@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PetListView: View {
-    let pets = PetManager.shared.MOCK_PETS
+    let pets = Pet.MOCK_PETS
     
     var body: some View {
         VStack(spacing: 10) {
@@ -20,7 +20,7 @@ struct PetListView: View {
                     .foregroundStyle(Color.Paws.Text.label)
                 Spacer()
                 Button {
-                    // Add new pet
+                    // TODO: Add new pet
                 } label: {
                     Text("Добавить")
                     Image(systemName: "plus")

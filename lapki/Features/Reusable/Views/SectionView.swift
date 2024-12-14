@@ -40,18 +40,3 @@ struct SectionView<Content: View>: View {
         .shadow(color: Color.black.opacity(0.1), radius: 5)
     }
 }
-
-#Preview {
-    SectionView(header: "Название секции") {
-        NavigationLink {
-            
-        } label: {
-            Text("Какой-нибудь текст")
-        }
-        NavigationLink {
-            
-        } label: {
-            Text("Еще текст")
-        }
-    }
-}

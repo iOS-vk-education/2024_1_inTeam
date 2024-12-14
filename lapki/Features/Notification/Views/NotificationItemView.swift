@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NotificationItemView: View {
-    var notifiaction: Notification
+    var notification: Notification
     
     var body: some View {
         HStack(alignment: .top, spacing: 6) {
@@ -17,7 +17,7 @@ struct NotificationItemView: View {
                 .scaledToFit()
                 .frame(width: 40)
             VStack(alignment: .leading, spacing: 3) {
-                Text("Корм почти закончился")
+                Text(notification.title)
                     .fontWeight(.semibold)
                     .fontDesign(.rounded)
                     .font(.subheadline)
@@ -40,5 +40,5 @@ struct NotificationItemView: View {
 }
 
 #Preview {
-    NotificationItemView(notifiaction: Notification(title: "Тестовое уведомление", body: "Это тестовое уведомление", createdAt: Date.now))
+    NotificationItemView(notification: Notification(title: "Тестовое уведомление", body: "Это тестовое уведомление", createdAt: Date.now))
 }

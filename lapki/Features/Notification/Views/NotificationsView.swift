@@ -32,7 +32,7 @@ struct NotificationsView: View {
             ScrollView {
                 VStack(spacing: 18) {
                     ForEach(viewModel.notifications) { notification in
-                        NotificationItemView(notifiaction: notification)
+                        NotificationItemView(notification: notification)
                     }
                 }
                 .padding(24)

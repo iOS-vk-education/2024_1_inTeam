@@ -8,8 +8,8 @@
 import Foundation
 
 public enum PlaceType: String, Codable {
-    case clinic
-    case walkingArea
-    case vaccination
-    case shelter
+    case clinic = "Клиника"
+    case walkingArea = "Прогулочная площадка"
+    case vaccination = "Пункт вакцинации"
+    case shelter = "Приют"
 }

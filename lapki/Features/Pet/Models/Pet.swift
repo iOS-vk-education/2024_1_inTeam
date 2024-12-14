@@ -33,16 +33,6 @@ enum DogBreed: String, CaseIterable {
     case goldenDoodle = "Дудлингер"
 }
 
-//protocol Pet: Identifiable, INotifier where NotificationType == PetNotificationType {
-//    associatedtype BreedType: RawRepresentable where BreedType.RawValue == String
-//    
-//    var id: String { get }
-//    var name: String { get set }
-//    var age: Int { get set }
-//    var breed: BreedType { get set }
-//    var imageURL: String? { get set }
-//}
-
 protocol PetNotifier: Identifiable, INotifier where NotificationType == PetNotificationType {}
 
 struct Pet: Identifiable, PetNotifier {
@@ -81,4 +71,8 @@ extension Pet {
 extension Pet {
     static var MOCK_CAT = Pet(id: UUID().uuidString, name: "Бебрик", age: 4, type: .cat(.bengal))
     static var MOCK_DOG = Pet(id: UUID().uuidString, name: "Бобик", age: 6, type: .dog(.goldenDoodle))
+    static var MOCK_PETS = [
+        MOCK_CAT,
+        MOCK_DOG
+    ]
 }

@@ -42,7 +42,7 @@ struct UserView: View {
         .sheet(isPresented: $showNotifications) {
             NotificationsView()
         }
-        // Could change to fullScreenCover(item, content)
+        // TODO: Could change to fullScreenCover(item, content)
         .fullScreenCover(isPresented: $showAppointments, content: { AppointmentsView() })
         .fullScreenCover(isPresented: $showSettings, content: { SettingsView() })
         .fullScreenCover(isPresented: $showProfile, content: {
@@ -56,7 +56,3 @@ struct UserView: View {
         )
     }
 }
-
-//#Preview {
-//    UserView()
-//}

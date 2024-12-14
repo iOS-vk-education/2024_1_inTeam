@@ -38,7 +38,7 @@ struct SettingsView: View {
                 
                 SectionView(header: "ПОМОЩЬ И ОБРАТНАЯ СВЯЗЬ") {
                     NavigationLink {
-                        // Navigate
+                        // TODO: Navigate
                     } label: {
                         HStack {
                             Text("О приложении")
@@ -51,7 +51,7 @@ struct SettingsView: View {
                         }
                     }
                     NavigationLink {
-                        // Navigate
+                        // TODO: Navigate
                     } label: {
                         HStack {
                             Text("Справка")
@@ -62,7 +62,7 @@ struct SettingsView: View {
                         }
                     }
                     NavigationLink {
-                        // Navigate
+                        // TODO: Navigate
                     } label: {
                         HStack {
                             Text("Предложить фичу")
@@ -109,8 +109,4 @@ struct SettingsView: View {
         }
     }
     
-}
-
-#Preview {
-    SettingsView()
 }

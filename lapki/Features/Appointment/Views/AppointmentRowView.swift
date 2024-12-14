@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppointmentRowView: View {
     
-    var appointment: AppointmentModel
+    let appointment: AppointmentModel
     
     var body: some View {
         HStack {
@@ -19,14 +19,14 @@ struct AppointmentRowView: View {
                     .scaledToFit()
                     .frame(height: 40)
             } else {
-                Image(systemName: "cat.circle")
+                Image(systemName: "pawprint.circle.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(height: 40)
             }
             
             VStack(alignment: .leading) {
-                Text("Красногвардейская ВЛ")
+                Text(appointment.place.name)
                     .font(.headline)
                 HStack(spacing: 16) {
                     Text("\(appointment.pet.name)")
@@ -42,8 +42,4 @@ struct AppointmentRowView: View {
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .shadow(color: .black.opacity(0.1), radius: 10)
     }
-}
-
-#Preview {
-    AppointmentRowView(appointment: AppointmentManager.shared.MOCK_APPOINTMENTS[0])
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct BusinessHours {
-    var openTime: Date?
-    var closeTime: Date?
-    var nonBusiness: Bool
+    let openTime: Date?
+    let closeTime: Date?
+    let nonBusiness: Bool
 }

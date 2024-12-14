@@ -9,7 +9,7 @@ import Foundation
 
 public struct WalkingAreaResponse: Codable {
     let id: Int
-    let photosIds: [PhotoId]
+    let photosIds: [String]
     let location: LocationResponse
     let lighting: Bool
     let fencing: Bool
