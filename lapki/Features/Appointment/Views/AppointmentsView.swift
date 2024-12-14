@@ -28,15 +28,17 @@ struct AppointmentsView: View {
                         VStack(spacing: 36) {
                             VStack(spacing: 18) {
                                 ForEach(viewModel.appointments.prefix(3)) { appointment in
-                                    NavigationLink(destination: AppointmentDetailView(appointment: appointment)) {
+                                    NavigationLink(destination: AppointmentDetailView(viewModel: viewModel, appointment: appointment)) {
                                         AppointmentRowView(appointment: appointment)
                                             .tint(Color.Paws.Text.label)
                                     }
                                 }
                                 if viewModel.showMore {
                                     ForEach(viewModel.appointments.dropFirst(3)) { appointment in
-                                        AppointmentRowView(appointment: appointment)
-                                            .tint(Color.Paws.Text.label)
+                                        NavigationLink(destination: AppointmentDetailView(viewModel: viewModel, appointment: appointment)) {
+                                            AppointmentRowView(appointment: appointment)
+                                                .tint(Color.Paws.Text.label)
+                                        }
                                     }
                                 }
                                 if viewModel.appointments.count > 3 {
@@ -50,7 +52,7 @@ struct AppointmentsView: View {
                                                 Text("Скрыть")
                                                 Image(systemName: "chevron.up")
                                             } else {
-                                                Text("Еще \(viewModel.appointments.dropFirst(3).count)")
+                                                Text("Еще \(viewModel.appointments.count - 3)")
                                                 Image(systemName: "chevron.down")
                                             }
                                         }
@@ -66,7 +68,10 @@ struct AppointmentsView: View {
                                     }
                                     .foregroundStyle(Color.Paws.Text.secondaryLabel)
                                     ForEach(viewModel.pastAppointments) { appointment in
-                                        AppointmentRowView(appointment: appointment)
+                                        NavigationLink(destination: AppointmentDetailView(viewModel: viewModel, appointment: appointment)) {
+                                            AppointmentRowView(appointment: appointment)
+                                                .tint(Color.Paws.Text.label)
+                                        }
                                     }
                                 }
                             }
