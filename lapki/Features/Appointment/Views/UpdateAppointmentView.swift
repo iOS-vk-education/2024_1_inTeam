@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct UpdateAppointmentView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    var appointment: AppointmentModel
+    @State private var date: Date
+    
+    init(appointment: AppointmentModel) {
+        self.appointment = appointment
+        _date = State(initialValue: appointment.date)
     }
-}
-
-#Preview {
-    UpdateAppointmentView()
+    
+    var body: some View {
+        VStack {
+            Text("Изменить дату записи")
+                .font(.headline)
+                .fontDesign(.rounded)
+                .bold()
+                .padding(.bottom, 16)
+            
+            DatePicker("Выберите дату", selection: $date, displayedComponents: [.date, .hourAndMinute])
+                .datePickerStyle(.graphical)
+                .padding()
+                .tint(Color.Paws.Content.purple)
+            Spacer()
+        }
+        .padding()
+        .presentationDetents([.fraction(0.7)])
+        .presentationCornerRadius(36)
+        .presentationBackground(Color.Paws.Background.background)
+    }
 }

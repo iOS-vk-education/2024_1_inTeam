@@ -10,7 +10,6 @@ import Glur
 
 struct PlaceCardView: View {
     var place: Place
-    var onCardTap: (() -> Void)? = nil
     var onActionButtonTap: (() -> Void)? = nil
     
     var body: some View {
@@ -42,7 +41,7 @@ struct PlaceCardView: View {
                                 .font(.system(size: 20, weight: .medium, design: .rounded))
                                 .lineLimit(1)
                                 .foregroundStyle(Color.Paws.Constant.white)
-                            Text("Ветеринарное учреждение")
+                            Text(place.type.rawValue)
                                 .font(.system(size: 16, weight: .regular, design: .rounded))
                                 .lineLimit(1)
                                 .foregroundStyle(Color.Paws.Constant.secondaryWhite)
@@ -60,9 +59,6 @@ struct PlaceCardView: View {
             }
             .clipped()
             .cornerRadius(12)
-            .onTapGesture {
-                onCardTap?()
-            }
     }
 }
 
