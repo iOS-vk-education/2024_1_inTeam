@@ -26,9 +26,11 @@ class AppointmentManager {
         appointments.append(appointment)
     }
     
-    func updateAppointment(_ appointment: AppointmentModel) {
-        appointments.removeAll(where: { $0.id == appointment.id })
-        appointments.append(appointment)
+    func updateAppointment(_ appointment: AppointmentModel, newDate: Date) {
+        if let index = appointments.firstIndex(where: { $0.id == appointment.id }) {
+            appointments[index].date = newDate
+        }
+        print("appointment updated", appointment)
     }
     
     func deleteAppointment(_ appointment: AppointmentModel) {

@@ -41,8 +41,8 @@ class AppointmentViewModel: ObservableObject {
         loadAppointments()
     }
     
-    func updateAppointment(_ appointment: AppointmentModel) {
-        appointmentManager.updateAppointment(appointment)
+    func updateAppointment(_ appointment: AppointmentModel, newDate: Date) {
+        appointmentManager.updateAppointment(appointment, newDate: newDate)
         loadAppointments()
     }
     

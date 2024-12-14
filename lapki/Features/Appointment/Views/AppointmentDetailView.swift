@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct AppointmentDetailView: View {
+    let viewModel: AppointmentViewModel
     let appointment: AppointmentModel
     @State private var showUpdateAppointmentSheet: Bool = false
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ScrollView {
@@ -73,7 +75,8 @@ struct AppointmentDetailView: View {
                         }
                     }
                     Button {
-                        // TODO: Navigate
+                        viewModel.deleteAppointment(appointment)
+                        dismiss()
                     } label: {
                         HStack {
                             Text("Удалить напоминание")
@@ -90,7 +93,7 @@ struct AppointmentDetailView: View {
         .navigationTitle("Запись")
         .background(Color.Paws.Background.background)
         .sheet(isPresented: $showUpdateAppointmentSheet) {
-            UpdateAppointmentView(appointment: appointment)
+            UpdateAppointmentView(appointment: appointment, viewModel: viewModel)
         }
     }
 }
