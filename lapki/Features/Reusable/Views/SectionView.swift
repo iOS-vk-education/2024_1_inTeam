@@ -19,13 +19,15 @@ struct SectionView<Content: View>: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(header)
-                .font(.subheadline)
-                .foregroundStyle(Color.Paws.Text.secondarySubhead)
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
-            VStack {
+        VStack(alignment: .leading) {
+            if header != "" {
+                Text(header)
+                    .font(.subheadline)
+                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 8)
+            }
+            VStack(alignment: .leading) {
                 content
                     .padding(.horizontal, 12)
                     .frame(maxWidth: .infinity, alignment: .leading)

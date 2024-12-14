@@ -21,5 +21,5 @@ struct WalkingAreaModel: Place, Codable {
 }
 
 extension WalkingAreaModel {
-    static var MOCK_WalkingAreaModel = WalkingAreaModel(isFavourite: false, coordinatesJson: nil, id: 12564, name: "Красногвардейская ветеринарная лечебница", type: PlaceType.walkingArea, address: "ул. Пушкина, дом Колотушкина, 7", photosId: ["TestClinic", "TestClinic"])
+    static var MOCK_CLINIC = WalkingAreaModel(isFavourite: false, coordinatesJson: nil, id: 12564, name: "Красногвардейская ветеринарная лечебница", type: .clinic, address: "ул. Пушкина, дом Колотушкина, 7", photosId: ["TestClinic", "TestClinic"])
 }

@@ -28,9 +28,10 @@ struct AppointmentRowView: View {
             VStack(alignment: .leading) {
                 Text(appointment.place.name)
                     .font(.headline)
+                    .lineLimit(1)
                 HStack(spacing: 16) {
-                    Text("\(appointment.pet.name)")
-                    Text("\(appointment.date.formatted(.dateTime))")
+                    Text(appointment.pet.name)
+                    Text(appointment.date.formatted(.dateTime))
                 }
                 .font(.callout)
                 .foregroundStyle(.gray)
