@@ -14,66 +14,68 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                SectionView(header: "УВЕДОМЛЕНИЯ") {
-                    Toggle(isOn: $viewModel.systemNotifications) {
-                        Text("Системные уведомления")
-                            .foregroundStyle(Color.Paws.Text.label)
-                    }
-                    .alert("Уведомления запрещены системой", isPresented: $viewModel.onFailure) {
-                        Button("Открыть настройки", role: .cancel) {
-                            openAppSettings()
+                VStack(spacing: 24) {
+                    SectionView(header: "УВЕДОМЛЕНИЯ") {
+                        Toggle(isOn: $viewModel.systemNotifications) {
+                            Text("Системные уведомления")
+                                .foregroundStyle(Color.Paws.Text.label)
                         }
-                    } message: {
-                        Text("Разрешите уведомления в настройках")
+                        .alert("Уведомления запрещены системой", isPresented: $viewModel.onFailure) {
+                            Button("Открыть настройки", role: .cancel) {
+                                openAppSettings()
+                            }
+                        } message: {
+                            Text("Разрешите уведомления в настройках")
+                        }
+                        .onChange(of: viewModel.systemNotifications) { newValue in
+                            viewModel.toggleSystemNotifications()
+                        }
+                        Toggle(isOn: $viewModel.internalNotifications) {
+                            Text("Внутренние уведомления")
+                                .foregroundStyle(Color.Paws.Text.label)
+                        }
                     }
-                    .onChange(of: viewModel.systemNotifications) { newValue in
-                        viewModel.toggleSystemNotifications()
+                    .padding(.horizontal, 16)
+                    
+                    SectionView(header: "ПОМОЩЬ И ОБРАТНАЯ СВЯЗЬ") {
+                        NavigationLink {
+                            // TODO: Navigate
+                        } label: {
+                            HStack {
+                                Text("О приложении")
+                                    .foregroundStyle(Color.Paws.Text.label)
+                                Spacer()
+                                Text("Версия 0.69")
+                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                            }
+                        }
+                        NavigationLink {
+                            // TODO: Navigate
+                        } label: {
+                            HStack {
+                                Text("Справка")
+                                    .foregroundStyle(Color.Paws.Text.label)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                            }
+                        }
+                        NavigationLink {
+                            // TODO: Navigate
+                        } label: {
+                            HStack {
+                                Text("Предложить фичу")
+                                    .foregroundStyle(Color.Paws.Text.label)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
+                            }
+                        }
                     }
-                    Toggle(isOn: $viewModel.internalNotifications) {
-                        Text("Внутренние уведомления")
-                            .foregroundStyle(Color.Paws.Text.label)
-                    }
+                    .padding(.horizontal, 16)
                 }
-                .padding(.horizontal, 16)
-                
-                SectionView(header: "ПОМОЩЬ И ОБРАТНАЯ СВЯЗЬ") {
-                    NavigationLink {
-                        // TODO: Navigate
-                    } label: {
-                        HStack {
-                            Text("О приложении")
-                                .foregroundStyle(Color.Paws.Text.label)
-                            Spacer()
-                            Text("Версия 0.69")
-                                .foregroundStyle(Color.Paws.Text.secondarySubhead)
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(Color.Paws.Text.secondarySubhead)
-                        }
-                    }
-                    NavigationLink {
-                        // TODO: Navigate
-                    } label: {
-                        HStack {
-                            Text("Справка")
-                                .foregroundStyle(Color.Paws.Text.label)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(Color.Paws.Text.secondarySubhead)
-                        }
-                    }
-                    NavigationLink {
-                        // TODO: Navigate
-                    } label: {
-                        HStack {
-                            Text("Предложить фичу")
-                                .foregroundStyle(Color.Paws.Text.label)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(Color.Paws.Text.secondarySubhead)
-                        }
-                    }
-                }
-                .padding(.horizontal, 16)
 #if DEBUG
                 SectionView(header: "DEBUG") {
                     NavigationLink {
