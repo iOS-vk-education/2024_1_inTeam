@@ -14,7 +14,6 @@ struct FinishAddPetView: View {
     let petName: String
     let petAge: Int
     let petType: PetType
-    
     let viewModel: UserPetListViewModel
     
     var body: some View {
