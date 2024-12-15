@@ -8,25 +8,26 @@
 import SwiftUI
 
 struct PlaceView: View {
-    var place: any Place
+    var place: Place
     @State var selectedPhoto = 0
     
     var body: some View {
         ScrollView {
+            
             VStack(alignment: .leading, spacing: 16) {
                 
                 Text(place.name)
-                    .fontWeight(.bold)
                     .padding(.horizontal)
-                    .font(.system(size: 24, weight: .heavy, design: .rounded))
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
                 
                 HStack {
-                    Text("Ветеринарное учреждение") //place.type (нужно что-то сделать с тайпом для вывода имени тайпа)
+                    Text("Ветеринарное учреждение") //TODO: place.type (нужно что-то сделать с тайпом для вывода имени тайпа)
                         .font(.system(size: 14, design: .rounded))
                         .foregroundColor(.black)
                     Spacer()
-                    Menu { //не хватает часов работы
+                    Menu { //TODO: не хватает часов работы
                         Text("Часы работы: 8:00 - 22:00")
+                            .foregroundColor(.black)
                     } label: {
                         Text("Открыто до 22:00")
                             .font(.system(size: 14, weight: .bold, design: .rounded))
@@ -39,7 +40,7 @@ struct PlaceView: View {
                 }
                 .padding(.horizontal)
                 
-                // Image Carousel
+                //TODO: Переделать Image Carousel на Pager
                 TabView(selection: $selectedPhoto) {
                     ForEach(place.photosId, id: \.self) { photoName in
                         Image(photoName)
@@ -74,7 +75,7 @@ struct PlaceView: View {
                             Text("Телефон")
                                 .fontWeight(.medium)
                                 .padding(.bottom, 2)
-                            Text("+7 495 432 23 54") //не хватает номера телефона в модели
+                            Text("+7 495 432 23 54") //TODO: не хватает номера телефона в модели
                         }
                     }
                 }
@@ -83,7 +84,7 @@ struct PlaceView: View {
                 .padding(.bottom)
                 
                 // Description
-                Text("Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.") //не хватает дескрипшна в модели
+                Text("Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.") //TODO: не хватает дескрипшна в модели
                     .font(.body)
                     .padding(.horizontal)
             }
@@ -92,70 +93,72 @@ struct PlaceView: View {
         .background(Color.Paws.Background.background)
         .safeAreaInset(edge: .bottom) {
             // Footer Buttons
-            HStack(spacing: 16) {
-                Button(action: {
-                    // Route action
-                }) {
-                    HStack {
-                        Text("Маршрут")
-                            .foregroundColor(.white)
-                        Image(systemName: "point.bottomleft.forward.to.arrowtriangle.uturn.scurvepath")
-                            .resizable()
-                            .padding(.vertical, 12)
-                            .scaledToFit()
-                        //                            .frame(width: 47, height: 47)
-                            .foregroundColor(.white)
+            VStack {
+                HStack(spacing: 16) {
+                    Button(action: {
+                        //TODO: Route action
+                    }) {
+                        HStack {
+                            Text("Маршрут")
+                                .foregroundColor(.white)
+                            Image(systemName: "point.bottomleft.forward.to.arrowtriangle.uturn.scurvepath")
+                                .resizable()
+                                .padding(.vertical, 12)
+                                .scaledToFit()
+                                .foregroundColor(.white)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 47)
+                        .padding(.horizontal)
+                        .background(Color.Paws.Constant.uiAccent)
+                        .cornerRadius(9)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 47)
-                    .padding(.horizontal)
-                    .background(Color.Paws.Constant.uiAccent)
-                    .cornerRadius(9)
+                    
+                    Button(action: {
+                        //TODO: Call action
+                    }) {
+                        Image(systemName: "phone.arrow.up.right")
+                            .resizable()
+                            .padding(.all, 12)
+                            .scaledToFit()
+                            .frame(width: 47, height: 47)
+                            .background(Color.Paws.Background.buttonBackground)
+                            .foregroundColor(Color.Paws.Constant.uiAccent)
+                            .cornerRadius(9)
+                    }
+                    Button(action: {
+                        //TODO: Web action
+                    }) {
+                        Image(systemName: "globe")
+                            .resizable()
+                            .padding(.all, 12)
+                            .scaledToFit()
+                            .frame(width: 47, height: 47)
+                            .background(Color.Paws.Background.buttonBackground)
+                            .foregroundColor(Color.Paws.Constant.uiAccent)
+                            .cornerRadius(9)
+                    }
+                    Button(action: {
+                        //TODO: Add appointment action
+                    }) {
+                        Image(systemName: "calendar.badge.plus")
+                            .resizable()
+                            .padding(.all, 10)
+                            .scaledToFit()
+                            .frame(width: 47, height: 47)
+                            .background(Color.Paws.Background.buttonBackground)
+                            .foregroundColor(Color.Paws.Constant.uiAccent)
+                            .cornerRadius(9)
+                    }
                 }
-                
-                Button(action: {
-                    // Call action
-                }) {
-                    Image(systemName: "phone.arrow.up.right")
-                        .resizable()
-                        .padding(.all, 12)
-                        .scaledToFit()
-                        .frame(width: 47, height: 47)
-                        .background(Color.Paws.Background.buttonBackground)
-                        .foregroundColor(Color.Paws.Constant.uiAccent)
-                        .cornerRadius(9)
-                }
-                Button(action: {
-                    // Web action
-                }) {
-                    Image(systemName: "globe")
-                        .resizable()
-                        .padding(.all, 12)
-                        .scaledToFit()
-                        .frame(width: 47, height: 47)
-                        .background(Color.Paws.Background.buttonBackground)
-                        .foregroundColor(Color.Paws.Constant.uiAccent)
-                        .cornerRadius(9)
-                }
-                Button(action: {
-                    // Add appointment action
-                }) {
-                    Image(systemName: "calendar.badge.plus")
-                        .resizable()
-                        .padding(.all, 10)
-                        .scaledToFit()
-                        .frame(width: 47, height: 47)
-                        .background(Color.Paws.Background.buttonBackground)
-                        .foregroundColor(Color.Paws.Constant.uiAccent)
-                        .cornerRadius(9)
-                }
+                .padding()
             }
-            .padding()
-            .background{
+            .background {
                 Rectangle()
                     .fill(Color.Paws.Background.background)
+                    .cornerRadius(24)
                     .shadow(radius: 8)
+                    .ignoresSafeArea()
             }
-            .cornerRadius(24)
         }
     }
 }
