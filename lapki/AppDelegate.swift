@@ -6,14 +6,22 @@
 //
 
 import UIKit
+import YandexMapsMobile
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        YMKMapKit.setApiKey(KeyManager.getKey("YandexMapKey") ?? "SET API KEY")
+        YMKMapKit.sharedInstance()
+        
+        UNUserNotificationCenter.current().delegate = self
+        application.registerForRemoteNotifications()
+        
+        NotificationCenter.shared.loadSubscriptions()
+        
         return true
     }
 
