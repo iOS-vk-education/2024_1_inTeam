@@ -15,6 +15,8 @@ struct UserView: View {
     @State private var showProfile: Bool = false
     @GestureState var isDragging: Bool = false
     
+    let petListViewModel = UserPetListViewModel()
+    
     var body: some View {
         VStack {
             UserHeaderView(showUserProfileView: $showProfile)
@@ -27,7 +29,7 @@ struct UserView: View {
                     .padding(.horizontal, 24)
                     .allowsHitTesting(!isDragging)
                 
-                PetListView()
+                PetListView(viewModel: petListViewModel)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 20)
                     .allowsHitTesting(!isDragging)
@@ -45,9 +47,8 @@ struct UserView: View {
         // TODO: Could change to fullScreenCover(item, content)
         .fullScreenCover(isPresented: $showAppointments, content: { AppointmentsView() })
         .fullScreenCover(isPresented: $showSettings, content: { SettingsView() })
-        .fullScreenCover(isPresented: $showProfile, content: {
-            UserProfileView()
-        })
+        .fullScreenCover(isPresented: $showProfile, content: { UserProfileView() })
+
         .gesture(
             DragGesture(minimumDistance: 0)
                 .updating($isDragging) { _, state, _ in

@@ -30,7 +30,6 @@ class AppointmentManager {
         if let index = appointments.firstIndex(where: { $0.id == appointment.id }) {
             appointments[index].date = newDate
         }
-        print("appointment updated", appointment)
     }
     
     func deleteAppointment(_ appointment: AppointmentModel) {

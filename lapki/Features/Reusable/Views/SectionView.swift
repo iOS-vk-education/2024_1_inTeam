@@ -29,7 +29,7 @@ struct SectionView<Content: View>: View {
             }
             VStack(alignment: .leading) {
                 content
-                    .padding(.horizontal, 12)
+                    .padding(.leading, 12)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, 8)
             }

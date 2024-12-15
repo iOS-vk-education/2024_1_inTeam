@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PetListView: View {
-    let pets = Pet.MOCK_PETS
+    @ObservedObject var viewModel: UserPetListViewModel
+    @State private var showAddPet: Bool = false
     
     var body: some View {
         VStack(spacing: 10) {
@@ -20,7 +21,7 @@ struct PetListView: View {
                     .foregroundStyle(Color.Paws.Text.label)
                 Spacer()
                 Button {
-                    // TODO: Add new pet
+                    showAddPet.toggle()
                 } label: {
                     Text("Добавить")
                     Image(systemName: "plus")
@@ -29,12 +30,21 @@ struct PetListView: View {
             }
             .padding(.bottom, 24)
             VStack(spacing: 18) {
-                ForEach(pets, id: \.id) { pet in
-                    PetItem(pet: pet)
-                        .padding(.vertical, 10)
-                        .foregroundStyle(.foreground)
+                if viewModel.pets.isEmpty {
+                    VStack(spacing: 4) {
+                        Text("У вас пока нет питомцев.")
+                        Text("Самое время добавить!")
+                            .bold()
+                    }
+                } else {
+                    ForEach(viewModel.pets, id: \.id) { pet in
+                        PetItem(pet: pet)
+                            .padding(.vertical, 10)
+                            .foregroundStyle(.foreground)
+                    }
                 }
             }
         }
+        .fullScreenCover(isPresented: $showAddPet, content: { AddPetView(viewModel: viewModel, showToggle: $showAddPet) })
     }
 }
