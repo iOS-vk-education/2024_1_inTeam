@@ -14,10 +14,11 @@ enum PetNotificationType: String, CaseIterable {
     case foodEnds
 }
 
-enum PetType {
+enum PetType: Hashable {
+    
     case cat(CatBreed)
     case dog(DogBreed)
-    case other
+    case other(String)
 }
 
 enum CatBreed: String, CaseIterable {
@@ -48,8 +49,8 @@ struct Pet: Identifiable, PetNotifier {
             return breed.rawValue
         case .dog(let breed):
             return breed.rawValue
-        case .other:
-            return nil
+        case .other(let breed):
+            return breed
         }
     }
 }
