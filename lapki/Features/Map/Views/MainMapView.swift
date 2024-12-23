@@ -49,5 +49,27 @@ struct MainMapView: View {
         .sheet(isPresented: $showUserSheet){
             UserView()
         }
+        .fullScreenCover(isPresented: $mapManager.showPlaceInfo, content: {
+            NavigationStack {
+                PlaceView(place: mapManager.presentedPlaceInfo!)
+                    .navigationTitle(mapManager.presentedPlaceInfo?.type.rawValue ?? "Учреждение")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                mapManager.showPlaceInfo = false
+                            } label: {
+                                HStack {
+                                    Image(systemName: "chevron.left")
+                                    Text("Назад")
+                                }
+                            }
+                            .foregroundStyle(Color.Paws.Constant.uiAccent)
+                        }
+                    }
+                    .toolbarBackground(Material.thinMaterial, for: .navigationBar)
+            }
+        })
+        
     }
 }
