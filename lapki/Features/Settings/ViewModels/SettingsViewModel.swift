@@ -10,12 +10,13 @@ import SwiftUI
 
 class SettingsViewModel: ObservableObject {
     @Published var systemNotifications: Bool = NotificationCenter.shared.systemService != nil {
-        didSet {
+        willSet {
             toggleSystemNotifications()
         }
     }
+    
     @Published var internalNotifications: Bool = NotificationCenter.shared.inAppService != nil {
-        didSet {
+        willSet {
             toggleInternalNotifications()
         }
     }
@@ -23,13 +24,13 @@ class SettingsViewModel: ObservableObject {
     @Published var onFailure: Bool = false
     
     func toggleSystemNotifications() {
-        if systemNotifications {
+        if !systemNotifications {
             Task {
                 let success = await NotificationCenter.shared.addSystemService()
-                if !success {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
+                    if !success {
                         self.systemNotifications = false
-                        self.onFailure = true
+                        onFailure = true
                     }
                 }
             }
@@ -39,18 +40,21 @@ class SettingsViewModel: ObservableObject {
     }
     
     func toggleInternalNotifications() {
-        if internalNotifications {
+        if !internalNotifications {
             NotificationCenter.shared.addInAppService()
         } else {
             NotificationCenter.shared.removeInAppService()
         }
     }
     
-    func checkSystemNotificationStatus() async {
-        let status = await NotificationCenter.shared.checkSystemNotificationStatus()
-        DispatchQueue.main.async {
-            self.systemNotifications = status
+    func checkSystemNotificationStatus() {
+        NotificationCenter.shared.checkSystemNotificationStatus { [self] status in
+            systemNotifications = status
         }
     }
     
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        print("settings view model did become active")
+        checkSystemNotificationStatus()
+    }
 }
