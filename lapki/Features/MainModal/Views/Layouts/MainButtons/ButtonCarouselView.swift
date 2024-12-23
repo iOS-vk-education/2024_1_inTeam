@@ -3,7 +3,7 @@ import SwiftUIPager
 
 let pages = [
     ModalButtonsSheetView(firstRow: [AnyView(
-        MainModalButton(buttonType: .large, bgColor: .blue) {
+        MainModalButton(buttonType: .large, bgColor: Color.Paws.Content.yellow) {
             Text("Места для прогулок")
                 .foregroundColor(Color.Paws.Constant.white)
                 .font(.custom("Moloko", size: 48))
@@ -15,7 +15,7 @@ let pages = [
         } action: {
             print("Tap")
         })], secondRow: [AnyView(
-            MainModalButton(buttonType: .small, bgColor: .yellow) {
+            MainModalButton(buttonType: .small, bgColor: Color.Paws.Content.pink) {
                 Text("Ветклиники")
                     .foregroundColor(Color.Paws.Text.label)
                     .font(.custom("Moloko", size: 36))
@@ -27,7 +27,7 @@ let pages = [
                 
             }
         ), AnyView(
-            MainModalButton(buttonType: .tiny, bgColor: .green) {
+            MainModalButton(buttonType: .tiny, bgColor: Color.Paws.Content.purple) {
                 Text("Бешенство")
                     .foregroundColor(Color.Paws.Constant.white)
                     .bold()
@@ -44,7 +44,7 @@ let pages = [
             }
         )]),
     ModalButtonsSheetView(firstRow: [AnyView(
-        MainModalButton(buttonType: .large, bgColor: .blue) {
+        MainModalButton(buttonType: .large, bgColor: Color.Paws.Content.green) {
             Text("Места для прогулок")
                 .font(.custom("Moloko", size: 48))
                 .foregroundColor(Color.Paws.Constant.white)
@@ -56,7 +56,7 @@ let pages = [
         } action: {
             
         })], secondRow: [AnyView(
-            MainModalButton(buttonType: .small, bgColor: .yellow) {
+            MainModalButton(buttonType: .small, bgColor: Color.Paws.Content.yellow) {
                 Text("Ветклиники")
                     .foregroundColor(Color.Paws.Text.label)
                     .font(.custom("Moloko", size: 36))
@@ -68,7 +68,7 @@ let pages = [
                 
             }
         ), AnyView(
-            MainModalButton(buttonType: .tiny, bgColor: .green) {
+            MainModalButton(buttonType: .tiny, bgColor: Color.Paws.Content.pink) {
                 Text("Бешенство")
                     .foregroundColor(Color.Paws.Constant.white)
                     .bold()
@@ -109,8 +109,4 @@ struct ButtonCarouselView: View {
                 
         )
     }
-}
-
-#Preview {
-    ButtonCarouselView()
 }
