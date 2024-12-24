@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainModalView: View {
     var body: some View {
         VStack(spacing: 20) {
             ScrollView(showsIndicators: false) {
@@ -19,8 +19,4 @@ struct ContentView: View {
 
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

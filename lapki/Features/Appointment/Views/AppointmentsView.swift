@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppointmentsView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var viewModel: AppointmentViewModel = AppointmentViewModel()
+    @StateObject var viewModel: AppointmentViewModel = AppointmentViewModel()
     
     var body: some View {
         NavigationStack {

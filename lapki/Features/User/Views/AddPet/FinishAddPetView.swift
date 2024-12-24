@@ -14,6 +14,7 @@ struct FinishAddPetView: View {
     let petName: String
     let petAge: Int
     let petType: PetType
+    let petBreed: PetBreed
     let viewModel: UserPetListViewModel
     
     var body: some View {
@@ -34,11 +35,9 @@ struct FinishAddPetView: View {
             
             Spacer()
             
-            Image(systemName: "checkmark.circle")
+            Image("SimpleCatDog")
                 .resizable()
-                .scaledToFit()
-                .frame(width: 70, height: 70)
-                .foregroundColor(.green)
+                .frame(width: 250, height: 250)
             
             Spacer()
             
@@ -55,11 +54,11 @@ struct FinishAddPetView: View {
             
             Spacer()
         }
-        .padding()
+        .frame(maxWidth: .infinity)
         .navigationBarBackButtonHidden()
         .background(Color.Paws.Background.background)
         .onAppear {
-            let pet = Pet(id: UUID().uuidString, name: petName, age: petAge, type: petType)
+            let pet = Pet(id: UUID().uuidString, name: petName, age: petAge, type: petType, enumBreed: petBreed)
             viewModel.addPet(pet)
         }
     }

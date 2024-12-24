@@ -90,23 +90,16 @@ let pages = [
 struct ButtonCarouselView: View {
     @StateObject var page: Page = .first()
     @GestureState var isDragging: Bool = false
+    @State private var isScrollable: Bool = true
     
     var body: some View {
         Pager(page: page, data: pages, id: \.id, content: { item in
             item
-                //.allowsHitTesting(!isDragging)
         })
-        .pagingPriority(.simultaneous)
+        .pagingPriority(.high)
         .sensitivity(.high)
         .itemAspectRatio(0.99)
         .itemSpacing(12)
         .frame(height: 357)
-        .gesture(
-            DragGesture()
-                .updating($isDragging) { _, state, _ in
-                    state = true
-                }
-                
-        )
     }
 }

@@ -30,6 +30,11 @@ class YandexMapManager: NSObject, ObservableObject {
         super.init()
         map.isNightModeEnabled = mapView.traitCollection.userInterfaceStyle == .dark
         map.addCameraListener(with: self)
+        map.move(with: YMKCameraPosition(
+            target: YMKPoint(latitude: 55.7522, longitude: 37.6156),
+            zoom: 10,
+            azimuth: 0,
+            tilt: 0))
         if #available(iOS 17.0, *) {
             Task { @MainActor in
                 print("Trait Changes registered")

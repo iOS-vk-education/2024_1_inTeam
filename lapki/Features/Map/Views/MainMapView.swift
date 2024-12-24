@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import BottomSheetSwiftUI
 
 struct MainMapView: View {
     @ObservedObject var mapManager = YandexMapManager()
     @State var showUserSheet: Bool = false
+    @State var bottomSheetPosition: BottomSheetPosition = .relativeTop(0.9)
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -46,6 +48,22 @@ struct MainMapView: View {
                 .edgesIgnoringSafeArea(.all)
                 .environmentObject(mapManager)
         }
+        .bottomSheet(bottomSheetPosition: $bottomSheetPosition, switchablePositions: [.relativeTop(0.9), .relativeBottom(0.2)]) {
+            SearchBarView()
+                .padding(.horizontal, 18)
+                .padding(.bottom, 18)
+        } mainContent: {
+            MainModalView()
+        }
+        .customAnimation(.smooth)
+        .customBackground(
+            Color.Paws.Background.background
+                .shadow(color: .black.opacity(0.1), radius: 10)
+                .clipShape(.rect(
+                    topLeadingRadius: 36,
+                    topTrailingRadius: 36
+                ))
+        )
         .sheet(isPresented: $showUserSheet){
             UserView()
         }

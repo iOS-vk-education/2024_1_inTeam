@@ -204,19 +204,3 @@ struct MainModalButton<ContentView: View>: View {
         }
     }
 }
-
-#Preview {
-//    MainModalButton(buttonType: .large, direction: .normal, bgColor: .blue.opacity(0.5)) {
-//        Text("Ветклиники")
-//            .font(.largeTitle)
-//            .bold()
-//            .foregroundStyle(.white)
-//    } content: {
-//        VStack(alignment: .leading) {
-//            Text("Сделайте прививку")
-//            
-//        }
-//    } action: {
-//        
-//    }
-}

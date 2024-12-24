@@ -13,11 +13,12 @@ struct EnterPetDetailsView: View {
     @Binding var showToggle: Bool
     
     let petType: PetType
+    let petBreed: PetBreed
     
     let viewModel: UserPetListViewModel
     
     var body: some View {
-        VStack {
+        ScrollView {
             SectionView {
                 HStack(spacing: 24) {
                     Text("Имя")
@@ -33,7 +34,7 @@ struct EnterPetDetailsView: View {
                     Spacer()
                     Picker("Возраст", selection: $petAge) {
                         ForEach(0...50, id: \.self) { age in
-                            Text("\(age) лет").tag(age)
+                            Text("\(age.toAgedString())").tag(age)
                         }
                     }
                     .pickerStyle(.wheel)
@@ -48,6 +49,7 @@ struct EnterPetDetailsView: View {
                                  petName: petName,
                                  petAge: petAge,
                                  petType: petType,
+                                 petBreed: petBreed,
                                  viewModel: viewModel)
             } label: {
                 Text("Далее")
@@ -57,12 +59,10 @@ struct EnterPetDetailsView: View {
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .tint(Color.Paws.Constant.uiAccent)
-            Image("SimpleCatDog")
-                .resizable()
-                .frame(width: 250, height: 250)
         }
         .navigationTitle("Укажите данные")
         .navigationBarTitleDisplayMode(.large)
         .background(Color.Paws.Background.background)
+        .ignoresSafeArea(.keyboard)
     }
 }

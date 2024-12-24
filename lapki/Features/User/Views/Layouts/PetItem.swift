@@ -33,7 +33,7 @@ struct PetItem: View {
                 Text(pet.name)
                     .font(.headline)
                     .foregroundStyle(Color.Paws.Text.label)
-                Text("\(pet.age) года, \(pet.breed ?? "без породы")")
+                Text("\(pet.stringedAge), \(pet.breed)")
                     .font(.callout)
                     .foregroundStyle(Color.Paws.Text.secondaryLabel)
             }

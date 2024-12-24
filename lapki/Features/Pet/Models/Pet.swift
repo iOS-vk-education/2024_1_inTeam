@@ -14,11 +14,16 @@ enum PetNotificationType: String, CaseIterable {
     case foodEnds
 }
 
+enum PetBreed: Hashable {
+    case catBreed(CatBreed)
+    case dogBreed(DogBreed)
+    case otherBreed(String)
+}
+
 enum PetType: Hashable {
-    
-    case cat(CatBreed)
-    case dog(DogBreed)
-    case other(String)
+    case cat
+    case dog
+    case other
 }
 
 enum CatBreed: String, CaseIterable {
@@ -40,16 +45,21 @@ struct Pet: Identifiable, PetNotifier {
     let id: String
     var name: String
     var age: Int
+    var stringedAge: String {
+        return age.toAgedString()
+    }
     var imageURL: String?
     var type: PetType
     
-    var breed: String? {
-        switch type {
-        case .cat(let breed):
+    var enumBreed: PetBreed
+    
+    var breed: String {
+        switch enumBreed {
+        case .catBreed(let breed):
             return breed.rawValue
-        case .dog(let breed):
+        case .dogBreed(let breed):
             return breed.rawValue
-        case .other(let breed):
+        case .otherBreed(let breed):
             return breed
         }
     }
@@ -70,10 +80,25 @@ extension Pet {
 }
 
 extension Pet {
-    static var MOCK_CAT = Pet(id: UUID().uuidString, name: "Бебрик", age: 4, type: .cat(.bengal))
-    static var MOCK_DOG = Pet(id: UUID().uuidString, name: "Бобик", age: 6, type: .dog(.goldenDoodle))
+    static var MOCK_CAT = Pet(id: UUID().uuidString, name: "Барсик", age: 3, type: .cat, enumBreed: .catBreed(.bengal))
+    static var MOCK_DOG = Pet(id: UUID().uuidString, name: "Бобик" , age: 4, type: .dog, enumBreed: .dogBreed(.goldenDoodle))
+    
     static var MOCK_PETS = [
         MOCK_CAT,
         MOCK_DOG
     ]
+}
+
+
+extension Int {
+    func toAgedString() -> String {
+        switch self {
+        case 1:
+            return "\(self) год"
+        case 2...4:
+            return "\(self) года"
+        default:
+            return "\(self) лет"
+        }
+    }
 }

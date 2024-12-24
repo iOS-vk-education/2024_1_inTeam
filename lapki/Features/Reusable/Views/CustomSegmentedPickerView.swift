@@ -39,7 +39,7 @@ struct CustomSegmentedPicker<T: Hashable>: View {
                     .padding(.horizontal, 16)
                     .frame(maxWidth: .infinity)
                     .background(selection == option ? activeColor : inactiveColor)
-                    .foregroundColor(selection == option ? .white : .black)
+                    .foregroundColor(selection == option ? .white : Color.Paws.Text.label)
                     .cornerRadius(cornerRadius)
                     .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 0)
                 }
