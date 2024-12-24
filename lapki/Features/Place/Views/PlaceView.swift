@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct PlaceView: View {
-    var viewModel = PlaceViewModel()
-    let place: Place
+    @StateObject var viewModel: PlaceViewModel
     @State var selectedPhoto = 0
+    @State var isAddingSpend = false
     
     var body: some View {
         ScrollView {
             
             VStack(alignment: .leading, spacing: 16) {
                 
-                Text(place.name)
+                Text(viewModel.place.name)
                     .padding(.horizontal)
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                 
                 HStack {
-                    Text("Ветеринарное учреждение") //TODO: place.type (нужно что-то сделать с тайпом для вывода имени тайпа)
+                    Text(viewModel.place.type.rawValue)
                         .font(.system(size: 14, design: .rounded))
                         .foregroundColor(.black)
                     Spacer()
@@ -43,7 +43,7 @@ struct PlaceView: View {
                 
                 //TODO: Переделать Image Carousel на Pager
                 TabView(selection: $selectedPhoto) {
-                    ForEach(place.photosId, id: \.self) { photoName in
+                    ForEach(viewModel.place.photosId, id: \.self) { photoName in
                         Image(photoName)
                             .resizable()
                             .scaledToFill()
@@ -65,7 +65,7 @@ struct PlaceView: View {
                             Text("Адрес")
                                 .fontWeight(.medium)
                                 .padding(.bottom, 2)
-                            Text(place.address)
+                            Text(viewModel.place.address)
                         }
                     }
                     .padding(.bottom, 8)
@@ -139,7 +139,7 @@ struct PlaceView: View {
                             .cornerRadius(9)
                     }
                     Button(action: {
-                        //TODO: Add appointment action
+                        isAddingSpend.toggle()
                     }) {
                         Image(systemName: "calendar.badge.plus")
                             .resizable()
@@ -150,6 +150,15 @@ struct PlaceView: View {
                             .foregroundColor(Color.Paws.Constant.uiAccent)
                             .cornerRadius(9)
                     }
+                    .sheet(isPresented: $isAddingSpend, content: {
+                        PlaceAddAppointmentView(viewModel: viewModel, addAppendAction: {
+                            viewModel.addAppointment()
+                            print(viewModel.date)
+                            isAddingSpend.toggle()
+                        })
+                        .presentationDetents([.height(UIScreen.main.bounds.height / 1.4)])
+                        .presentationCornerRadius(48)
+                    })
                 }
                 .padding()
             }
