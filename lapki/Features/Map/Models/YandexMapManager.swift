@@ -14,6 +14,8 @@ class YandexMapManager: NSObject, ObservableObject {
     @Published var userLocation: CLLocation? = nil
     @Published var cameraBounds: MapCameraBounds? = nil
     @Published var cameraMoving: Bool = false
+    @Published var presentedPlaceInfo: Place? = nil
+    @Published var showPlaceInfo: Bool = false
     
     private var delegate: YandexMapManagerDelegate? = nil
     
@@ -28,6 +30,11 @@ class YandexMapManager: NSObject, ObservableObject {
         super.init()
         map.isNightModeEnabled = mapView.traitCollection.userInterfaceStyle == .dark
         map.addCameraListener(with: self)
+        map.move(with: YMKCameraPosition(
+            target: YMKPoint(latitude: 55.7522, longitude: 37.6156),
+            zoom: 10,
+            azimuth: 0,
+            tilt: 0))
         if #available(iOS 17.0, *) {
             Task { @MainActor in
                 print("Trait Changes registered")
@@ -42,6 +49,11 @@ class YandexMapManager: NSObject, ObservableObject {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        
+        // TODO: Говнокод
+        for item in WalkingAreaModel.MOCK_CLINICS {
+            addPlacemark(item.toMapPlacemark()!)
+        }
     }
     
     func moveMapToUserLocation(duration: Float = 0.3) {
@@ -78,6 +90,18 @@ class YandexMapManager: NSObject, ObservableObject {
     func setDelegate(_ delegate: YandexMapManagerDelegate) {
         self.delegate = delegate
     }
+    
+    func addPlacemark(_ mark: MapPlacemark) {
+        let iconStyle = YMKIconStyle()
+        iconStyle.anchor = NSValue(cgPoint: CGPoint(x: 0.5, y: 0.6))
+        iconStyle.scale = 0.3
+        
+        let placemark = map.mapObjects.addPlacemark()
+        placemark.geometry = YMKPoint(latitude: mark.coordinates.latitude, longitude: mark.coordinates.longitude)
+        placemark.addTapListener(with: self)
+        placemark.userData = mark
+        placemark.setIconWith(UIImage(named: "pin_clinic")!, style: iconStyle) // TODO: Обработать анврап
+    }
 }
 
 extension YandexMapManager: CLLocationManagerDelegate {
@@ -110,5 +134,18 @@ extension YMKVisibleRegion {
             BottomLeftLatitude: self.bottomLeft.latitude,
             BottomLeftLongitude: self.bottomLeft.longitude
         )
+    }
+}
+
+extension YandexMapManager: YMKMapObjectTapListener {
+    func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
+        if let mapObject = mapObject as? YMKPlacemarkMapObject, let placemark = mapObject.userData as? MapPlacemark {
+            showPlaceInfo = false
+            presentedPlaceInfo = WalkingAreaModel.MOCK_CLINICS.first(where: { $0.id == placemark.id })
+            showPlaceInfo = true
+            print("Tapped placemark: \(String(describing: mapObject.userData as? MapPlacemark))")
+            return true
+        }
+        return false
     }
 }

@@ -13,9 +13,9 @@ class AppointmentManager {
     private init() {}
     
     private var appointments: [AppointmentModel] = [
-        AppointmentModel(place: WalkingAreaModel.MOCK_CLINIC, pet: Pet.MOCK_CAT, date: Date.now + 300),
-        AppointmentModel(place: WalkingAreaModel.MOCK_CLINIC, pet: Pet.MOCK_CAT, date: Date.now + 100),
-        AppointmentModel(place: WalkingAreaModel.MOCK_CLINIC, pet: Pet.MOCK_CAT, date: Date.now - 1000)
+        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[0], pet: Pet.MOCK_CAT, date: Date.now + 300),
+        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[1], pet: Pet.MOCK_CAT, date: Date.now + 100),
+//        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[2], pet: Pet.MOCK_CAT, date: Date.now - 1000)
     ]
     
     func fetchAppointments() -> [AppointmentModel] {
@@ -26,9 +26,10 @@ class AppointmentManager {
         appointments.append(appointment)
     }
     
-    func updateAppointment(_ appointment: AppointmentModel) {
-        appointments.removeAll(where: { $0.id == appointment.id })
-        appointments.append(appointment)
+    func updateAppointment(_ appointment: AppointmentModel, newDate: Date) {
+        if let index = appointments.firstIndex(where: { $0.id == appointment.id }) {
+            appointments[index].date = newDate
+        }
     }
     
     func deleteAppointment(_ appointment: AppointmentModel) {

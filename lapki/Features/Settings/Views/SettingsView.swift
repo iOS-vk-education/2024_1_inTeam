@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject private var viewModel = SettingsViewModel()
+    @StateObject private var viewModel = SettingsViewModel()
     
     var body: some View {
         NavigationStack {
@@ -26,9 +26,6 @@ struct SettingsView: View {
                             }
                         } message: {
                             Text("Разрешите уведомления в настройках")
-                        }
-                        .onChange(of: viewModel.systemNotifications) { newValue in
-                            viewModel.toggleSystemNotifications()
                         }
                         Toggle(isOn: $viewModel.internalNotifications) {
                             Text("Внутренние уведомления")

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AppointmentRowView: View {
-    
     let appointment: AppointmentModel
     
     var body: some View {

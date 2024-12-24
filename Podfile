@@ -6,6 +6,8 @@ target 'lapki' do
   use_frameworks!
 
   pod 'YandexMapsMobile', '4.8.1-lite'
+  pod 'BottomSheetSwiftUI'
+  pod 'SwiftUIPager'
 
   target 'lapkiTests' do
     inherit! :search_paths

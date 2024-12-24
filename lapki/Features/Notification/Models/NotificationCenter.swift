@@ -14,12 +14,6 @@ import UserNotifications
 class NotificationCenter {
     static var shared: NotificationCenter = NotificationCenter()
     
-    private init() {
-        Task {
-            let _ = await checkSystemNotificationStatus()
-        }
-    }
-    
     private(set) var notifications: [Notification] = []
     
     private(set) var systemService: NotificationService?
@@ -41,23 +35,28 @@ class NotificationCenter {
         }
     }
     
-    func checkSystemNotificationStatus() async -> Bool {
-        let settings = await UNUserNotificationCenter.current().notificationSettings()
-        let isAuthorized = settings.authorizationStatus == .authorized
-        DispatchQueue.main.async {
-            self.systemService = isAuthorized ? UNUserNotificationCenter.current() : nil
+    func checkSystemNotificationStatus(completion: @escaping (Bool) -> Void) {
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { (settings) in
+            if(settings.authorizationStatus == .authorized) {
+                self.systemService = center
+                completion(true)
+            } else {
+                self.systemService = nil
+                completion(false)
+            }
         }
-        return isAuthorized
     }
     
     func addSystemService() async -> Bool {
         let service = await UNUserNotificationCenter.current().authorize()
-        if let service {
-            self.systemService = service
-            return true
-        } else {
+        guard let service else {
             return false
         }
+        DispatchQueue.main.async {
+            self.systemService = service
+        }
+        return true
     }
     
     func addInAppService() {
@@ -87,12 +86,17 @@ class NotificationCenter {
     func loadSubscriptions() {
         let subscribedServices = UserDefaults.standard.array(forKey: "subscribedServices") as? [String] ?? []
         if subscribedServices.contains(supportedServices.system.rawValue) {
-            self.systemService = UNUserNotificationCenter.current() as NotificationService
+            checkSystemNotificationStatus { (isAuthorized) in
+                if isAuthorized {
+                    self.systemService = UNUserNotificationCenter.current()
+                } else {
+                    self.systemService = nil
+                }
+            }
         }
         if subscribedServices.contains(supportedServices.inApp.rawValue) {
             self.inAppService = InAppService.shared
         }
     }
-
 }
 

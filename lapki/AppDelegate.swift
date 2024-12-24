@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         application.registerForRemoteNotifications()
         
         NotificationCenter.shared.loadSubscriptions()
-        
+
+
         return true
     }
 
@@ -38,7 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print("App will enter foreground")
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("App did enter background")
+    }
 
 }
 

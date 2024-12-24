@@ -88,3 +88,17 @@ extension Pet {
         MOCK_DOG
     ]
 }
+
+
+extension Int {
+    func toAgedString() -> String {
+        switch self {
+        case 1:
+            return "\(self) год"
+        case 2...4:
+            return "\(self) года"
+        default:
+            return "\(self) лет"
+        }
+    }
+}

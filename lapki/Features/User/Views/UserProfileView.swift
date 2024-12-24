@@ -9,8 +9,6 @@ import SwiftUI
 
 struct UserProfileView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var systemNotifications: Bool = false
-    @State private var internalNotifications: Bool = false
     
     var body: some View {
         NavigationStack {

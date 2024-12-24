@@ -29,13 +29,9 @@ class NotifViewController: UIViewController {
     }
 
     private func setupButtons() {
-        let inAppRegButton = createButton(withTitle: "Подписаться на In-app", action: #selector(subscribeInApp))
-        let systemRegButton = createButton(withTitle: "Подписаться на System", action: #selector(subscribeSystem))
         let notifButton = createButton(withTitle: "Вызвать уведомление", action: #selector(callNotification))
-        let inAppUnsubButton = createButton(withTitle: "Отписаться от In-app", action: #selector(inAppUnsub))
-        let systemUnsubButton = createButton(withTitle: "Отписаться от System", action: #selector(systemUnsub))
         
-        let stackView = UIStackView(arrangedSubviews: [inAppRegButton, systemRegButton, notifButton, inAppUnsubButton, systemUnsubButton])
+        let stackView = UIStackView(arrangedSubviews: [notifButton])
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,28 +64,12 @@ class NotifViewController: UIViewController {
         return button
     }
 
-    @objc private func subscribeInApp() {
-        NotificationCenter.shared.addInAppService()
-    }
-
-    @objc private func subscribeSystem() async {
-        let _ = await NotificationCenter.shared.addSystemService()
-    }
-
     @objc private func callNotification() {
         // Example usage of INotifier and pushing notification to Notification Center
         let notification = Pet.MOCK_CAT.composeNotification(type: .foodEnds)
         Pet.MOCK_CAT.pushNotification(notification)
         
         notificationTextView.text = InAppService.shared.activeNotification?.body ?? "No new notifications"
-    }
-
-    @objc private func inAppUnsub() {
-        NotificationCenter.shared.removeInAppService()
-    }
-
-    @objc private func systemUnsub() {
-        NotificationCenter.shared.removeSystemService()
     }
 }
 
