@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PlaceView: View {
-    var place: Place
+    var viewModel = PlaceViewModel()
+    let place: Place
     @State var selectedPhoto = 0
     
     var body: some View {
@@ -156,9 +157,10 @@ struct PlaceView: View {
                 Rectangle()
                     .fill(Color.Paws.Background.background)
                     .cornerRadius(24)
-                    .shadow(radius: 8)
+                    .shadow(radius: 4)
                     .ignoresSafeArea()
             }
         }
+        .toolbarBackground(Color.Paws.Background.background, for: .navigationBar)
     }
 }
