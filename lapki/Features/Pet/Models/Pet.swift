@@ -41,7 +41,7 @@ enum DogBreed: String, CaseIterable {
 
 protocol PetNotifier: Identifiable, INotifier where NotificationType == PetNotificationType {}
 
-struct Pet: Identifiable, PetNotifier {
+struct Pet: Identifiable, PetNotifier, Hashable {
     let id: String
     var name: String
     var age: Int

@@ -9,7 +9,7 @@ import SwiftUI
 import Glur
 
 struct PlaceCardView: View {
-    var place: Place
+    let place: Place
     var onActionButtonTap: (() -> Void)? = nil
     
     var body: some View {

@@ -8,22 +8,32 @@
 import SwiftUI
 
 struct PlaceView: View {
-    var place: Place
-    @Environment(\.dismiss) private var dismiss
+    @StateObject var viewModel: PlaceViewModel
     @State var selectedPhoto = 0
+    @State var isAddingSpend = false
     
     var body: some View {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    
-                    Text(place.name)
-                        .fontWeight(.bold)
-                        .padding(.horizontal)
-                        .font(.system(size: 24, weight: .heavy, design: .rounded))
-                    
-                    HStack {
-                        Text("Ветеринарное учреждение") //place.type (нужно что-то сделать с тайпом для вывода имени тайпа)
-                            .font(.system(size: 14, design: .rounded))
+        ScrollView {
+            
+            VStack(alignment: .leading, spacing: 16) {
+                
+                Text(viewModel.place.name)
+                    .padding(.horizontal)
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                
+                HStack {
+                    Text(viewModel.place.type.rawValue)
+                        .font(.system(size: 14, design: .rounded))
+                        .foregroundColor(.black)
+                    Spacer()
+                    Menu { //TODO: не хватает часов работы
+                        Text("Часы работы: 8:00 - 22:00")
+                            .foregroundColor(.black)
+                    } label: {
+                        Text("Открыто до 22:00")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(.black)
+                        Image(systemName: "chevron.down")
                             .foregroundColor(.black)
                         Spacer()
                         Menu { //не хватает часов работы
@@ -40,46 +50,55 @@ struct PlaceView: View {
                     }
                     .padding(.horizontal)
                     
-                    // Image Carousel
-                    TabView(selection: $selectedPhoto) {
-                        ForEach(place.photosId, id: \.self) { photoName in
-                            Image(photoName)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(height: 273)
-                                .clipped()
-                                .cornerRadius(8)
-                                .padding(.horizontal)
+                }
+                .padding(.horizontal)
+                
+                //TODO: Переделать Image Carousel на Pager
+                TabView(selection: $selectedPhoto) {
+                    ForEach(viewModel.place.photosId, id: \.self) { photoName in
+                        Image(photoName)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 273)
+                            .clipped()
+                            .cornerRadius(8)
+                            .padding(.horizontal)
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .always))
+                .frame(height: 273)
+                
+                // Address and Phone
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(alignment: .top) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(.black)
+                        VStack (alignment: .leading) {
+                            Text("Адрес")
+                                .fontWeight(.medium)
+                                .padding(.bottom, 2)
+                            Text(viewModel.place.address)
                         }
                     }
-                    .tabViewStyle(.page(indexDisplayMode: .always))
-                    .frame(height: 273)
-                    
-                    // Address and Phone
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(alignment: .top) {
-                            Image(systemName: "mappin.and.ellipse")
-                                .foregroundColor(.black)
-                            VStack (alignment: .leading) {
-                                Text("Адрес")
-                                    .fontWeight(.medium)
-                                    .padding(.bottom, 2)
-                                Text(place.address)
-                            }
-                        }
-                        .padding(.bottom, 8)
-                        HStack(alignment: .top) {
-                            Image(systemName: "phone")
-                                .foregroundColor(.black)
-                            VStack (alignment: .leading) {
-                                Text("Телефон")
-                                    .fontWeight(.medium)
-                                    .padding(.bottom, 2)
-                                Text("+7 495 432 23 54") //не хватает номера телефона в модели
-                            }
+                    .padding(.bottom, 8)
+                    HStack(alignment: .top) {
+                        Image(systemName: "phone")
+                            .foregroundColor(.black)
+                        VStack (alignment: .leading) {
+                            Text("Телефон")
+                                .fontWeight(.medium)
+                                .padding(.bottom, 2)
+                            Text("+7 495 432 23 54") //TODO: не хватает номера телефона в модели
                         }
                     }
-                    .font(.subheadline)
+                }
+                .font(.subheadline)
+                .padding(.horizontal)
+                .padding(.bottom)
+                
+                // Description
+                Text("Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.") //TODO: не хватает дескрипшна в модели
+                    .font(.body)
                     .padding(.horizontal)
                     .padding(.bottom)
                     
@@ -90,12 +109,15 @@ struct PlaceView: View {
                 }
                 .padding(.vertical)
             }
-            .background(Color.Paws.Background.background)
-            .safeAreaInset(edge: .bottom) {
-                // Footer Buttons
+            .padding(.vertical)
+        }
+        .background(Color.Paws.Background.background)
+        .safeAreaInset(edge: .bottom) {
+            // Footer Buttons
+            VStack {
                 HStack(spacing: 16) {
                     Button(action: {
-                        // Route action
+                        //TODO: Route action
                     }) {
                         HStack {
                             Text("Маршрут")
@@ -104,7 +126,6 @@ struct PlaceView: View {
                                 .resizable()
                                 .padding(.vertical, 12)
                                 .scaledToFit()
-                            //                            .frame(width: 47, height: 47)
                                 .foregroundColor(.white)
                         }
                         .frame(maxWidth: .infinity, maxHeight: 47)
@@ -114,7 +135,7 @@ struct PlaceView: View {
                     }
                     
                     Button(action: {
-                        // Call action
+                        //TODO: Call action
                     }) {
                         Image(systemName: "phone.arrow.up.right")
                             .resizable()
@@ -126,7 +147,7 @@ struct PlaceView: View {
                             .cornerRadius(9)
                     }
                     Button(action: {
-                        // Web action
+                        //TODO: Web action
                     }) {
                         Image(systemName: "globe")
                             .resizable()
@@ -138,7 +159,7 @@ struct PlaceView: View {
                             .cornerRadius(9)
                     }
                     Button(action: {
-                        // Add appointment action
+                        isAddingSpend.toggle()
                     }) {
                         Image(systemName: "calendar.badge.plus")
                             .resizable()
@@ -149,14 +170,26 @@ struct PlaceView: View {
                             .foregroundColor(Color.Paws.Constant.uiAccent)
                             .cornerRadius(9)
                     }
+                    .sheet(isPresented: $isAddingSpend, content: {
+                        PlaceAddAppointmentView(viewModel: viewModel, addAppendAction: {
+                            viewModel.addAppointment()
+                            print(viewModel.date)
+                            isAddingSpend.toggle()
+                        })
+                        .presentationDetents([.height(UIScreen.main.bounds.height / 1.4)])
+                        .presentationCornerRadius(48)
+                    })
                 }
                 .padding()
-                .background{
-                    Rectangle()
-                        .fill(Color.Paws.Background.background)
-                        .shadow(radius: 8)
-                }
-                .cornerRadius(24)
+            }
+            .background {
+                Rectangle()
+                    .fill(Color.Paws.Background.background)
+                    .cornerRadius(24)
+                    .shadow(radius: 4)
+                    .ignoresSafeArea()
+            }
         }
+        .toolbarBackground(Color.Paws.Background.background, for: .navigationBar)
     }
 }
