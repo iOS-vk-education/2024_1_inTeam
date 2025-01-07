@@ -1,0 +1,49 @@
+name: lapki
+options:
+  bundleIdPrefix: ru.inTeam
+  postGenCommand: pod install
+settings:
+  base:
+    SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+    SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+    TARGETED_DEVICE_FAMILY: "1"
+    PRODUCT_BUNDLE_IDENTIFIER: $(BUNDLE_ID_PREFIX).$(TARGET_NAME)
+    INFOPLIST_FILE: lapki/Resources/Info.plist
+targets:
+  lapki:
+    type: application
+    platform: iOS
+    deploymentTarget: 16.4
+    sources:
+      - lapki
+    resources:
+      - path: "lapki/Assets.xcassets"
+    dependencies:
+      - package: Glur
+    info:
+      path: lapki/Info.plist
+      properties:
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UILaunchStoryboardName: LaunchScreen
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: "Default Configuration"
+                UISceneDelegateClassName: "$(PRODUCT_MODULE_NAME).SceneDelegate"
+        NSLocationUsageDescription: "Чтобы находить места рядом с вами"
+        UIAppFonts:
+          - "Moloko.otf"
+  lapkiTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: 16.4
+    sources:
+      - lapkiTests
+    dependencies:
+      - target: lapki
+packages:
+  Glur:
+    url: https://github.com/joogps/Glur.git
+    version: 1.0.4
