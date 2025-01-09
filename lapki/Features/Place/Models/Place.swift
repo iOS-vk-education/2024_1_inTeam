@@ -26,3 +26,4 @@ extension Place {
         return MapPlacemark(id: id, type: type, coordinates: coordinates)
     }
 }
+

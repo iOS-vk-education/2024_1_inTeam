@@ -11,11 +11,13 @@ struct SectionView<Content: View>: View {
     var header: String
     var content: Content
     var footer: String
+    var leadPadding: Bool
     
-    init(header: String = "", footer: String = "", @ViewBuilder content: () -> Content) {
+    init(header: String = "", footer: String = "", @ViewBuilder content: () -> Content, leadPadding: Bool = false) {
         self.header = header
         self.footer = footer
         self.content = content()
+        self.leadPadding = leadPadding
     }
     
     var body: some View {
@@ -29,7 +31,7 @@ struct SectionView<Content: View>: View {
             }
             VStack(alignment: .leading) {
                 content
-                    .padding(.leading, 12)
+                    .padding(.leading, leadPadding ? 12 : 0)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, 8)
             }

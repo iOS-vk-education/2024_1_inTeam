@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct MainModalView: View {
+    @StateObject var viewModel = MainModalViewModel()
+    
     var body: some View {
         VStack(spacing: 20) {
             ScrollView(showsIndicators: false) {
-                ButtonCarouselView()
+                ButtonCarouselView(viewModel: viewModel)
                 FavouritePlacesView()
                     .padding(.horizontal, 18)
-                    .padding(.bottom, 50)
             }
 
         }

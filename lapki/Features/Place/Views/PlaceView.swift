@@ -35,20 +35,8 @@ struct PlaceView: View {
                             .foregroundColor(.black)
                         Image(systemName: "chevron.down")
                             .foregroundColor(.black)
-                        Spacer()
-                        Menu { //не хватает часов работы
-                            Text("Часы работы: 8:00 - 22:00")
-                        } label: {
-                            Text("Открыто до 22:00")
-                                .font(.system(size: 14, weight: .bold, design: .rounded))
-                                .foregroundColor(.black)
-                            Image(systemName: "chevron.down")
-                                .foregroundColor(.black)
-                                .padding(.leading, -5)
-                        }
-                        
+                            .padding(.leading, -5)
                     }
-                    .padding(.horizontal)
                     
                 }
                 .padding(.horizontal)
@@ -100,14 +88,6 @@ struct PlaceView: View {
                 Text("Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.") //TODO: не хватает дескрипшна в модели
                     .font(.body)
                     .padding(.horizontal)
-                    .padding(.bottom)
-                    
-                    // Description
-                    Text("Структурное подразделение СББЖ ЮАО ГБУ «Мосветобъединение». Вакцинация, оформление ветеринарных сопроводительных документов, услуги по лечению животных. Работает центр лучевой диагностики и компьютерной томографии.") //не хватает дескрипшна в модели
-                        .font(.body)
-                        .padding(.horizontal)
-                }
-                .padding(.vertical)
             }
             .padding(.vertical)
         }

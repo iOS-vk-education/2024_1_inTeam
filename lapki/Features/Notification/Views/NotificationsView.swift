@@ -45,7 +45,3 @@ struct NotificationsView: View {
         .presentationBackground(Color.Paws.Background.background)
     }
 }
-
-#Preview {
-    NotificationsView()
-}

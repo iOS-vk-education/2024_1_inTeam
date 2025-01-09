@@ -38,7 +38,3 @@ struct NotificationItemView: View {
         .shadow(color: .black.opacity(0.1), radius: 10)
     }
 }
-
-#Preview {
-    NotificationItemView(notification: Notification(title: "Тестовое уведомление", body: "Это тестовое уведомление", createdAt: Date.now))
-}

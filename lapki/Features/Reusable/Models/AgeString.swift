@@ -9,6 +9,13 @@ import Foundation
 
 extension Int {
     func toAgedString() -> String {
+        // 👉👈
+        switch self {
+        case 11...14:
+            return "\(self) лет"
+        default:
+            break
+        }
         switch self % 10 {
         case 1:
             return "\(self) год"
@@ -17,4 +24,5 @@ extension Int {
         default:
             return "\(self) лет"
         }
+    }
 }

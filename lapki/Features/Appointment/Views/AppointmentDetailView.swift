@@ -15,15 +15,15 @@ struct AppointmentDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 36) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Место записи")
+            VStack(spacing: 30) {
+                VStack(alignment: .leading, spacing: 14) {
+                    Text("\(appointment.date.formatted(.dateTime))")
                         .font(.headline)
                         .fontDesign(.rounded)
                         .bold()
                     if appointment.place.photosId.first != nil {
                         NavigationLink {
-                            PlaceView(place: appointment.place)
+                            PlaceView(viewModel: PlaceViewModel(place: appointment.place))
                         } label: {
                             PlaceCardView(place: appointment.place, onActionButtonTap:  {
                                 
@@ -33,7 +33,7 @@ struct AppointmentDetailView: View {
                     } else {
                         SectionView {
                             NavigationLink {
-                                PlaceView(place: appointment.place)
+                                PlaceView(viewModel: PlaceViewModel(place: appointment.place))
                             } label: {
                                 HStack {
                                         Text(appointment.place.name)
@@ -46,21 +46,18 @@ struct AppointmentDetailView: View {
                         }
                     }
                 }
-                VStack(alignment: .leading, spacing: 8) {
-                    VStack(alignment: .leading) {
-                        Text("Дата приема: \(appointment.date.formatted(.dateTime))")
-                        Text("Вы записали питомца")
-                    }
+                VStack(alignment: .leading, spacing: 14) {
+                    Text("Вы записали")
                     .font(.headline)
                     .fontDesign(.rounded)
                     .bold()
-                    SectionView {
+                    SectionView(content:  {
                         NavigationLink {
-                            // TODO: Navigate to PetView
+                            PetProfileView()
                         } label: {
                             PetItem(pet: appointment.pet)
                         }
-                    }
+                    }, leadPadding: false)
                 }
                 SectionView {
                     Button {

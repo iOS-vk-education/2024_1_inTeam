@@ -13,9 +13,7 @@ class AppointmentManager {
     private init() {}
     
     private var appointments: [AppointmentModel] = [
-        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[0], pet: Pet.MOCK_CAT, date: Date.now + 300),
-        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[1], pet: Pet.MOCK_CAT, date: Date.now + 100),
-//        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[2], pet: Pet.MOCK_CAT, date: Date.now - 1000)
+
     ]
     
     func fetchAppointments() -> [AppointmentModel] {

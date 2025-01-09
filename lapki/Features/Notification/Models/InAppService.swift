@@ -9,10 +9,10 @@ import Foundation
 
 // Internal in-app notification service, which can show up to one notification.
 // Assumed to be used on main screen to show latest pop-up notification.
-class InAppService: NotificationService {
+class InAppService: NotificationService, ObservableObject {
     static var shared: InAppService = InAppService()
     
-    var activeNotification: Notification?
+    @Published var activeNotification: Notification?
     
     func recieve(_ notification: Notification) {
         activeNotification = notification
@@ -24,3 +24,4 @@ class InAppService: NotificationService {
         activeNotification = nil
     }
 }
+

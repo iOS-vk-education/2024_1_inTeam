@@ -7,8 +7,9 @@
 
 import Foundation
 
-enum AppointmentNotificationType: String, CaseIterable {
-    case reminder
+enum AppointmentNotificationType {
+    case reminderHour(AppointmentModel)
+    case reminderDay(AppointmentModel)
     // Can add more types
 }
 
@@ -28,15 +29,18 @@ struct AppointmentModel: Identifiable, INotifier {
 
     func composeNotification(type: AppointmentNotificationType) -> Notification {
         switch type {
-            case .reminder:
-            return Notification(title: "Напоминание о записи", body: "У вас назначена запись на \(date) в \(place.name)", createdAt: Date.now)
+            case .reminderHour:
+            return Notification(title: "Напоминание о записи", body: "Менее часа до записи в \(place.name)", icon: "📆", createdAt: Date.now)
+        case .reminderDay:
+            return Notification(title: "Напоминание о записи", body: "Менее суток до записи в \(place.name)", icon: "📆", createdAt: Date.now)
+
         }
     }
 }
 
-extension AppointmentModel {
-    static var MOCK_APPOINTMENTS: [AppointmentModel] = [
-        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[0], pet: Pet.MOCK_DOG, date: Date(timeIntervalSince1970: 167654)),
-        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[0], pet: Pet.MOCK_CAT, date: Date(timeIntervalSince1970: 167654)),
-    ]
-}
+//extension AppointmentModel {
+//    static var MOCK_APPOINTMENTS: [AppointmentModel] = [
+//        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[0], pet: Pet.MOCK_DOG, date: Date(timeIntervalSince1970: 167654)),
+//        AppointmentModel(place: WalkingAreaModel.MOCK_CLINICS[0], pet: Pet.MOCK_CAT, date: Date(timeIntervalSince1970: 167654)),
+//    ]
+//}

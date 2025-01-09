@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 // Notification structure that is used
 // for Notification center.
@@ -15,5 +16,8 @@ struct Notification: Identifiable {
     let id: String = UUID().uuidString
     let title: String
     let body: String
+    let icon: String?
     let createdAt: Date
+    //let data: any INotifier
+    //let data: NotificationType
 }

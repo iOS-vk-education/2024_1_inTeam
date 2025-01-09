@@ -10,6 +10,7 @@ import SwiftUI
 struct PetListView: View {
     @ObservedObject var viewModel: UserPetListViewModel
     @State private var showAddPet: Bool = false
+    @State private var showPetProfile: Bool = false
     
     var body: some View {
         VStack(spacing: 10) {
@@ -38,13 +39,20 @@ struct PetListView: View {
                     }
                 } else {
                     ForEach(viewModel.pets, id: \.id) { pet in
-                        PetItem(pet: pet)
-                            .padding(.vertical, 10)
-                            .foregroundStyle(.foreground)
+                        Button {
+                            showPetProfile.toggle()
+                        } label: {
+                            PetItem(pet: pet)
+                                .padding(.vertical, 10)
+                                .foregroundStyle(.foreground)
+                        }
                     }
                 }
             }
         }
         .fullScreenCover(isPresented: $showAddPet, content: { AddPetView(viewModel: viewModel, showToggle: $showAddPet) })
+        .fullScreenCover(isPresented: $showPetProfile, content: {
+            PetProfileView()
+        })
     }
 }
