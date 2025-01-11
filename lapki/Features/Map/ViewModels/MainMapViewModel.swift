@@ -7,11 +7,17 @@
 
 import Foundation
 import Combine
+import Swinject
 
 class MainMapViewModel: ObservableObject {
     @Published var recentNotification: Notification?
     private let notificationService = InAppService.shared
     private var cancellables = Set<AnyCancellable>()
+    @Published var results: [Place] = []
+    @Published var showPlaceInfo: Bool = false
+    @Published var placeInfo: Place? = nil
+    @Published var searchFieldActive: Bool = false
+    let repository = Container.placeRepository
     
     init() {
         notificationService.$activeNotification

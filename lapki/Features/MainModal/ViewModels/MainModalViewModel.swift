@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 class MainModalViewModel: ObservableObject {
+    
     let pages = [
         ModalButtonsSheetView(firstRow: [AnyView(
             MainModalButton(buttonType: .large, bgColor: Color.Paws.Content.yellow) {
@@ -30,7 +31,7 @@ class MainModalViewModel: ObservableObject {
                 } content: {
                     EmptyView()
                 } image: {
-                    Image("dogImage")
+                    Image("dogImage2")
                 } action: {
                     
                 }
@@ -55,7 +56,7 @@ class MainModalViewModel: ObservableObject {
                 }
             )]),
         ModalButtonsSheetView(firstRow: [AnyView(
-            MainModalButton(buttonType: .large, bgColor: Color.Paws.Content.green) {
+            MainModalButton(buttonType: .large, direction: .reversed, bgColor: Color.Paws.Content.green) {
                 Text("Места для прогулок")
                     .font(.custom("Moloko", size: 48))
                     .foregroundColor(Color.Paws.Constant.black)
@@ -63,7 +64,7 @@ class MainModalViewModel: ObservableObject {
                 Text("5 рядом с вами")
                     .foregroundColor(Color.Paws.Constant.white)
             } image: {
-                Image("dogImage")
+                Image("dogImage3")
             } action: {
                 
             })], secondRow: [AnyView(
@@ -74,7 +75,7 @@ class MainModalViewModel: ObservableObject {
                 } content: {
                     EmptyView()
                 } image: {
-                    Image("dogImage")
+                    Image("dogImage4")
                 } action: {
                     
                 }

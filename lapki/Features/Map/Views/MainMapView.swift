@@ -9,9 +9,10 @@ import SwiftUI
 import BottomSheetSwiftUI
 
 struct MainMapView: View {
-    @ObservedObject var mapManager = YandexMapManager()
+    @StateObject var mapManager = YandexMapManager()
     @State var showUserSheet: Bool = false
     @State var bottomSheetPosition: BottomSheetPosition = .relativeTop(0.9)
+    @StateObject var viewModel = MainMapViewModel()
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -49,13 +50,12 @@ struct MainMapView: View {
                 .environmentObject(mapManager)
         }
         .bottomSheet(bottomSheetPosition: $bottomSheetPosition, switchablePositions: [.relativeTop(0.9), .relativeBottom(0.2)]) {
-            SearchBarView()
+            SearchBarView(viewModel: viewModel)
                 .padding(.horizontal, 18)
                 .padding(.bottom, 18)
         } mainContent: {
-            MainModalView()
+            MainModalView(mapViewModel: viewModel)
         }
-        .customAnimation(.smooth)
         .customBackground(
             Color.Paws.Background.background
                 .shadow(color: .black.opacity(0.1), radius: 10)
@@ -69,7 +69,7 @@ struct MainMapView: View {
         }
         .fullScreenCover(isPresented: $mapManager.showPlaceInfo, content: {
             NavigationStack {
-                PlaceView(place: mapManager.presentedPlaceInfo!)
+                PlaceView(viewModel: PlaceViewModel(place: mapManager.presentedPlaceInfo!))
                     .navigationTitle(mapManager.presentedPlaceInfo?.type.rawValue ?? "Учреждение")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
@@ -88,6 +88,28 @@ struct MainMapView: View {
                     .toolbarBackground(Material.thinMaterial, for: .navigationBar)
             }
         })
+        .fullScreenCover(isPresented: $viewModel.showPlaceInfo) {
+            NavigationStack {
+                PlaceView(viewModel: PlaceViewModel(place: viewModel.placeInfo!))
+                    .navigationTitle(mapManager.presentedPlaceInfo?.type.rawValue ?? "Учреждение")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                viewModel.showPlaceInfo = false
+                            } label: {
+                                HStack {
+                                    Image(systemName: "chevron.left")
+                                    Text("Назад")
+                                }
+                            }
+                            .foregroundStyle(Color.Paws.Constant.uiAccent)
+                        }
+                    }
+                    .toolbarBackground(Material.thinMaterial, for: .navigationBar)
+            }
+            
+        }
         
     }
 }

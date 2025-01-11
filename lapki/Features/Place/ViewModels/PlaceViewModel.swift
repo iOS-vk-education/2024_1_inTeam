@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 final class PlaceViewModel: ObservableObject {
-    let place: Place
+    @Published var place: Place
     let pets = PetManager.shared.fetchPets()
     @Published var date: Date
     @Published var pet: Pet?

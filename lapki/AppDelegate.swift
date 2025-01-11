@@ -7,6 +7,7 @@
 
 import UIKit
 import YandexMapsMobile
+import Swinject
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -21,8 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         application.registerForRemoteNotifications()
         
         NotificationCenter.shared.loadSubscriptions()
-
-
+        
+        Container.shared.register(PlaceRepository.self) { _ in
+            PlaceRepositoryTestImpl()
+        }
+        .inObjectScope(.container)
+        
         return true
     }
 

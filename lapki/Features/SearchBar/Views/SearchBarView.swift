@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import Swinject
 
 struct SearchBarView: View {
-    @State var isActive = false
     @State var text = ""
+    @ObservedObject var viewModel: MainMapViewModel
+    @FocusState var isFocused
+    @State var showCancelButton: Bool = false
+
     var body: some View {
         HStack {
             HStack {
@@ -17,14 +21,8 @@ struct SearchBarView: View {
                 TextField(text: $text) {
                     Text("Поиск")
                 }
+                .focused($isFocused)
                 Spacer()
-            }
-            .onTapGesture {
-                if !isActive {
-                    withAnimation {
-                        isActive = true
-                    }
-                }
             }
             .foregroundStyle(.gray.opacity(0.5))
             .padding(.vertical, 10)
@@ -33,23 +31,33 @@ struct SearchBarView: View {
             .frame(maxWidth: .infinity)
             .background(.gray.opacity(0.1))
             .clipShape(RoundedRectangle(cornerRadius: 24))
-            if isActive {
-                HStack {
-                    Button {
-                        withAnimation {
-                            isActive = false
-                        }
-                    } label: {
-                        Text("Отмена")
-                    }
+            .onChange(of: isFocused) { state in
+                viewModel.searchFieldActive = state
+                withAnimation {
+                    showCancelButton = state
                 }
-                .transition(.move(edge: .trailing))
             }
+            .onChange(of: text) { newText in
+                if newText.isEmpty {
+                    viewModel.results = []
+                    return
+                }
+                viewModel.results = viewModel.repository.filter(by: PlaceNameSpecification(keyword: newText))
+            }
+            if showCancelButton {
+                Button {
+                    text = ""
+                    isFocused = false
+                    withAnimation {
+                        showCancelButton = false
+                    }
+                } label: {
+                    Text("Отмена")
+                }
+                .transition(.move(edge: .trailing).combined(with: .opacity))
+            }
+                
         }
         
     }
-}
-
-#Preview {
-    SearchBarView()
 }

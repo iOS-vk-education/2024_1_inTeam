@@ -8,6 +8,7 @@
 import UIKit
 import YandexMapsMobile
 import CoreLocation
+import Swinject
 
 class YandexMapManager: NSObject, ObservableObject {
     
@@ -16,6 +17,7 @@ class YandexMapManager: NSObject, ObservableObject {
     @Published var cameraMoving: Bool = false
     @Published var presentedPlaceInfo: Place? = nil
     @Published var showPlaceInfo: Bool = false
+    private let placeRepository = Container.placeRepository
     
     private var delegate: YandexMapManagerDelegate? = nil
     
@@ -51,7 +53,7 @@ class YandexMapManager: NSObject, ObservableObject {
         manager.startUpdatingLocation()
         
         // TODO: Говнокод
-        for item in WalkingAreaModel.MOCK_CLINICS {
+        for item in placeRepository.fetchAll() {
             addPlacemark(item.toMapPlacemark()!)
         }
     }
@@ -100,7 +102,22 @@ class YandexMapManager: NSObject, ObservableObject {
         placemark.geometry = YMKPoint(latitude: mark.coordinates.latitude, longitude: mark.coordinates.longitude)
         placemark.addTapListener(with: self)
         placemark.userData = mark
-        placemark.setIconWith(UIImage(named: "pin_clinic")!, style: iconStyle) // TODO: Обработать анврап
+        
+        var imageName: String = ""
+        
+        // TODO: добавить картинки для других мест
+        switch mark.type {
+        case .clinic:
+            imageName = "pin_clinic"
+        case .walkingArea:
+            imageName = "pin_walk"
+        case .vaccination:
+            imageName = "pin_clinic"
+        case .shelter:
+            imageName = "pin_clinic"
+        }
+        
+        placemark.setIconWith(UIImage(named: imageName)!, style: iconStyle) // TODO: Обработать анврап
     }
 }
 
@@ -141,7 +158,7 @@ extension YandexMapManager: YMKMapObjectTapListener {
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
         if let mapObject = mapObject as? YMKPlacemarkMapObject, let placemark = mapObject.userData as? MapPlacemark {
             showPlaceInfo = false
-            presentedPlaceInfo = WalkingAreaModel.MOCK_CLINICS.first(where: { $0.id == placemark.id })
+            presentedPlaceInfo = placeRepository.fetchById(id: placemark.id)
             showPlaceInfo = true
             print("Tapped placemark: \(String(describing: mapObject.userData as? MapPlacemark))")
             return true

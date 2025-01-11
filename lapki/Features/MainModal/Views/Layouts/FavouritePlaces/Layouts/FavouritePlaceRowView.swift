@@ -8,31 +8,32 @@
 import SwiftUI
 
 struct FavouritePlaceRowView: View {
+    let place: Place
     
     var body: some View {
         HStack(spacing: 14) {
-            Image(systemName: "cross.fill")
-                .resizable()
-                .scaledToFit()
-                .padding(11)
-                .background(Color.Paws.Content.purple)
-                .clipShape(Circle())
-                .frame(width: 48, height: 48)
+            PlaceIconBuilder(placeType: place.type)
             VStack(alignment: .leading) {
-                Text("Красногвардейская ВЛ")
+                Text(place.name)
                     .font(.headline)
+                    .multilineTextAlignment(.leading)
                     .foregroundStyle(Color.Paws.Text.label)
-                Text("Ветеринарное учреждение")
+                Text(place.type.rawValue)
                     .font(.subheadline)
+                    .multilineTextAlignment(.leading)
                     .foregroundStyle(Color.Paws.Text.secondaryLabel)
             }
             Spacer()
-            Image(systemName: "phone")
-                .resizable()
-                .frame(width: 29, height: 29)
-                .scaledToFit()
-                .padding()
-                .foregroundStyle(Color.Paws.Text.label)
+            Button {
+                
+            } label: {
+                Image(systemName: "phone")
+                    .resizable()
+                    .frame(width: 29, height: 29)
+                    .scaledToFit()
+                    .padding()
+                    .foregroundStyle(Color.Paws.Text.label)
+            }
         }
     }
 }
