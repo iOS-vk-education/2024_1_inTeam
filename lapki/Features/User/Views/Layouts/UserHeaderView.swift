@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Swinject
 
 struct UserHeaderView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var showUserProfileView: Bool
+    
+    @State var authedUser = Container.authedUser
     
     var body: some View {
         HStack(alignment: .top) {
@@ -19,18 +22,33 @@ struct UserHeaderView: View {
                 }
             } label: {
                 HStack {
-                    Image("sample")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 48, height: 48)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle()
-                                .stroke(Color.Paws.Background.background, lineWidth: 3)
-                        }
-                        .shadow(color: Color.black.opacity(0.1), radius: 12)
+                    if let avatarURL =  authedUser.photoName {
+                        Image(avatarURL)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 48, height: 48)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle()
+                                    .stroke(Color.Paws.Background.background, lineWidth: 3)
+                            }
+                            .shadow(color: Color.black.opacity(0.1), radius: 12)
+                    } else {
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 48, height: 48)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle()
+                                    .stroke(Color.Paws.Background.background, lineWidth: 3)
+                            }
+                            .shadow(color: Color.black.opacity(0.1), radius: 12)
+                            .foregroundStyle(Color.Paws.Text.label)
+                    }
+                    
                     VStack(alignment: .leading) {
-                        Text("Константин Кулаков")
+                        Text("\(authedUser.firstName) \(authedUser.lastName)")
                             .font(.headline)
                             .fontDesign(.rounded)
                             .fontWeight(.bold)

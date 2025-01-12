@@ -49,23 +49,19 @@ enum DogBreed: String, CaseIterable {
 
 struct Pet: Identifiable, INotifier, Hashable {
     
-    
     let id: String
     var name: String
     var age: Int
-    // dateBirth
     var dateBirth: Date = Date()
-    // pass
     var passportURLs: [String] = []
-    // medBook
     var medBookURLs: [String] = []
-    // paul
     var gender: Gender = .other
-    // description
     var description: String = ""
+    
     var stringedAge: String {
         return age.toAgedString()
     }
+    
     var imageURL: String?
     var type: PetType
     
@@ -107,16 +103,3 @@ extension Pet {
     ]
 }
 
-//
-//extension Int {
-//    func toAgedString() -> String {
-//        switch self {
-//        case 1:
-//            return "\(self) год"
-//        case 2...4:
-//            return "\(self) года"
-//        default:
-//            return "\(self) лет"
-//        }
-//    }
-//}

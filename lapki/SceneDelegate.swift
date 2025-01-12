@@ -7,20 +7,25 @@
 
 import UIKit
 import SwiftUI
+import Swinject
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let mapHostingController = UIHostingController(rootView: MainTabView())
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = mapHostingController
+        
+        if let authenticatedUser = authenticate() {
+            setupMainInterface(in: window, with: authenticatedUser)
+        } else {
+            setupLoginInterface(in: window)
+        }
+        
         window.makeKeyAndVisible()
         self.window = window
     }
@@ -58,3 +63,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+func authenticate() -> AuthedUser? {
+    let userRepository = Container.userRepository
+    let credentials = UserCredentials(email: "mleykhner@gmail.com", password: "leykhnerMax123")
+    
+    do {
+        let user = try userRepository.authUser(with: credentials)
+        
+        Container.shared.register(AuthedUser.self) { _ in
+            AuthedUser(from: user)
+        }
+        .inObjectScope(.container)
+        
+        return user
+    } catch {
+        print("Authentication failed: \(error)")
+        return nil
+    }
+}
+
+private func setupMainInterface(in window: UIWindow, with user: AuthedUser) {
+    window.rootViewController = UIHostingController(rootView: MainTabView())
+}
+
+private func setupLoginInterface(in window: UIWindow) {
+    window.rootViewController = UIHostingController(rootView: LoginView())
+}

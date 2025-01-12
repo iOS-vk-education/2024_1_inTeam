@@ -5,10 +5,7 @@
 //  Created by Maxim Makarenkov on 15.12.2024.
 //
 
-class PetManager {
-    static let shared = PetManager()
-    
-    private init() {}
+class PetRepositoryImpl: PetRepository {
     
     var pets: [Pet] = []
     

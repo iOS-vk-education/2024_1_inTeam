@@ -7,12 +7,14 @@
 
 import SwiftUI
 import BottomSheetSwiftUI
+import Swinject
 
 struct MainMapView: View {
     @StateObject var mapManager = YandexMapManager()
     @State var showUserSheet: Bool = false
     @State var bottomSheetPosition: BottomSheetPosition = .relativeTop(0.9)
     @StateObject var viewModel = MainMapViewModel()
+    private let authedUser = Container.authedUser
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -22,16 +24,31 @@ struct MainMapView: View {
                         showUserSheet.toggle()
                     }
                 } label: {
-                    Image("sample")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 48, height: 48)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle()
-                                .stroke(Color.Paws.Background.background, lineWidth: 3)
-                        }
-                        .shadow(color: Color.black.opacity(0.1), radius: 12)
+                    if let avatarURL = authedUser.photoName {
+                        Image(avatarURL)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 48, height: 48)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle()
+                                    .stroke(Color.Paws.Background.background, lineWidth: 3)
+                            }
+                            .shadow(color: Color.black.opacity(0.1), radius: 12)
+                    } else {
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 48, height: 48)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle()
+                                    .stroke(Color.Paws.Background.background, lineWidth: 3)
+                            }
+                            .shadow(color: Color.black.opacity(0.1), radius: 12)
+                            .foregroundStyle(Color.Paws.Text.label)
+                    }
+
                 }
                 .opacity(showUserSheet ? 0 : 1)
                 Spacer()

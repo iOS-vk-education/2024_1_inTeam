@@ -18,6 +18,22 @@ struct UserProfileView: View {
                         .padding(.top, 16)
                         .padding(.horizontal, 24)
                     
+                    SectionView(header: "ПРОФИЛЬ") {
+                        NavigationLink {
+                            UserEditView()
+                        } label: {
+                            HStack {
+                                Text("Изменить профиль")
+                                    .foregroundStyle(Color.Paws.Text.label)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(Color.Paws.Text.secondarySubhead)
+
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                    
                     SectionView(header: "БЕЗОПАСНОСТЬ И ВХОД") {
                         NavigationLink {
                             // Navigate

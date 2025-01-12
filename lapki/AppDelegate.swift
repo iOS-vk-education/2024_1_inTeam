@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import YandexMapsMobile
 import Swinject
 
@@ -25,6 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         Container.shared.register(PlaceRepository.self) { _ in
             PlaceRepositoryTestImpl()
+        }
+        .inObjectScope(.container)
+        
+        Container.shared.register(UserRepository.self) { _ in
+            UserTestDB()
+        }
+        .inObjectScope(.container)
+        
+        Container.shared.register(PetRepository.self) { _ in
+            PetRepositoryImpl()
         }
         .inObjectScope(.container)
         
@@ -52,6 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("App did enter background")
     }
-
 }
+
 

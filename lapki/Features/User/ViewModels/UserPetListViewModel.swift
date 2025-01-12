@@ -6,25 +6,24 @@
 //
 
 import Foundation
+import Swinject
 
 class UserPetListViewModel: ObservableObject {
     // MARK: - Properties
     @Published var pets: [Pet] = []
-    
-    private let petManager: PetManager
+    let petRepository = Container.petRepository
     
     // MARK: - Initializer
-    init(manager: PetManager = .shared) {
-        self.petManager = manager
+    init() {
         self.fetchPets()
     }
     
     func fetchPets() {
-        pets = petManager.fetchPets()
+        pets = petRepository.fetchPets()
     }
     
     func addPet(_ pet: Pet) {
-        petManager.addPet(pet)
+        petRepository.addPet(pet)
         self.fetchPets()
     }
 }

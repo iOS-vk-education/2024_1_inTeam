@@ -7,10 +7,11 @@
 
 import Foundation
 import SwiftUI
+import Swinject
 
 final class PlaceViewModel: ObservableObject {
     @Published var place: Place
-    let pets = PetManager.shared.fetchPets()
+    let pets = Container.petRepository.fetchPets()
     @Published var date: Date
     @Published var pet: Pet?
     

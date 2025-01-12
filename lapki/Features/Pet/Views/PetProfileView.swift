@@ -7,6 +7,8 @@
 
 import SwiftUI
 struct PetProfileView: View {
+    //@ObservedObject var petViewModel: PetViewModel
+    
     var body: some View {
         NavigationStack{
             ScrollView{
