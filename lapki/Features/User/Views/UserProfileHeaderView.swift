@@ -9,11 +9,12 @@ import SwiftUI
 import Swinject
 
 struct UserProfileHeaderView: View {
-    @State var authedUser = Container.authedUser
+    //@State var authedUser = Container.authedUser
+    @ObservedObject var viewModel: UserViewModel
     
     var body: some View {
         HStack {
-            if let avatarURL = authedUser.photoName {
+            if let avatarURL = viewModel.user.photoName {
                 Image(avatarURL)
                     .resizable()
                     .frame(width: 64, height: 64)
@@ -25,12 +26,12 @@ struct UserProfileHeaderView: View {
                     .clipShape(Circle())
             }
             VStack(alignment: .leading) {
-                Text("\(authedUser.firstName) \(authedUser.lastName)")
+                Text("\(viewModel.user.firstName) \(viewModel.user.lastName)")
                     .font(.title2)
                     .fontWeight(.bold)
                     .fontDesign(.rounded)
                     .foregroundStyle(Color.Paws.Text.label)
-                Text(authedUser.email)
+                Text(viewModel.user.email)
                     .font(.subheadline)
                     .foregroundStyle(Color.Paws.Text.secondaryLabel)
             }

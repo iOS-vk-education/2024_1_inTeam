@@ -1,5 +1,5 @@
 //
-//  EditUserViewModel.swift
+//  UserViewModel.swift
 //  lapki
 //
 //  Created by Maxim Makarenkov on 12.01.2025.
@@ -8,7 +8,7 @@
 import Foundation
 import Swinject
 
-class EditUserViewModel: ObservableObject {
+class UserViewModel: ObservableObject {
     let userRepository = Container.userRepository
     @Published var user: AuthedUser = Container.authedUser
     

@@ -14,6 +14,7 @@ struct UserView: View {
     @State private var showNotifications: Bool = false
     @State private var showProfile: Bool = false
     @GestureState var isDragging: Bool = false
+    @StateObject var userViewModel = UserViewModel()
     
     let petListViewModel = UserPetListViewModel()
     
@@ -47,7 +48,7 @@ struct UserView: View {
         // TODO: Could change to fullScreenCover(item, content)
         .fullScreenCover(isPresented: $showAppointments, content: { AppointmentsView() })
         .fullScreenCover(isPresented: $showSettings, content: { SettingsView() })
-        .fullScreenCover(isPresented: $showProfile, content: { UserProfileView() })
+        .fullScreenCover(isPresented: $showProfile, content: { UserProfileView(viewModel: userViewModel) })
 
         .gesture(
             DragGesture(minimumDistance: 0)

@@ -9,12 +9,13 @@ import SwiftUI
 
 struct UserProfileView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var viewModel: UserViewModel
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    UserProfileHeaderView()
+                    UserProfileHeaderView(viewModel: viewModel)
                         .padding(.top, 16)
                         .padding(.horizontal, 24)
                     

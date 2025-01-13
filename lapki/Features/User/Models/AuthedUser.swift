@@ -27,4 +27,10 @@ class AuthedUser {
         self.firstName = user.firstName
         self.lastName = user.lastName
     }
+    
+    func updateLocal(with user: AuthedUser) {
+        self.firstName = user.firstName
+        self.lastName = user.lastName
+        self.email = user.email
+    }
 }

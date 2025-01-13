@@ -9,7 +9,7 @@ import SwiftUI
 import Swinject
 
 struct UserEditView: View {
-    @StateObject var viewModel = EditUserViewModel()
+    @StateObject var viewModel = UserViewModel()
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
