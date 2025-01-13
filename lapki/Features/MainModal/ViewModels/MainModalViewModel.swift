@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 class MainModalViewModel: ObservableObject {
+    let clinics: [ClinicModel] = PlaceRepositoryTestImpl().places.filter { $0 is ClinicModel } as! [ClinicModel]
+    let walkingAreas: [WalkingAreaModel] = PlaceRepositoryTestImpl().places.filter { $0 is WalkingAreaModel } as! [WalkingAreaModel]
     
     let pages = [
         ModalButtonsSheetView(firstRow: [AnyView(
@@ -17,12 +19,11 @@ class MainModalViewModel: ObservableObject {
                     .foregroundColor(Color.Paws.Constant.black)
                     .font(.custom("Moloko", size: 48))
             } content: {
-                Text("5 рядом с вами")
-                    .foregroundColor(Color.Paws.Constant.white)
+                EmptyView()
             } image: {
                 Image("dogImage")
             } action: {
-                print("Tap")
+                
             })], secondRow: [AnyView(
                 MainModalButton(buttonType: .small, bgColor: Color.Paws.Content.pink) {
                     Text("Ветклиники")
@@ -96,6 +97,5 @@ class MainModalViewModel: ObservableObject {
                     
                 }
             )])
-        
     ]
 }

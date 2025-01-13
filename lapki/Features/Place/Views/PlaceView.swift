@@ -10,8 +10,9 @@ import Swinject
 
 struct PlaceView: View {
     @ObservedObject var viewModel: PlaceViewModel
-    @State var selectedPhoto = 0
+    @State var selectedPhoto: String?
     @State var isAddingSpend = false
+    @State private var showingOptions = false
     private let placeRepository = Container.placeRepository
     
     var body: some View {
@@ -27,7 +28,7 @@ struct PlaceView: View {
                         .font(.system(size: 14, design: .rounded))
                         .foregroundColor(Color.Paws.Text.label)
                     Spacer()
-                    Menu { //TODO: не хватает часов работы
+                    Menu {
                         Text("Часы работы: 8:00 - 22:00")
                             .foregroundColor(Color.Paws.Text.label)
                     } label: {
@@ -42,20 +43,19 @@ struct PlaceView: View {
                 }
                 .padding(.horizontal)
                 
-                //TODO: Переделать Image Carousel на Pager
                 TabView(selection: $selectedPhoto) {
                     ForEach(viewModel.place.photosId, id: \.self) { photoName in
                         Image(photoName)
                             .resizable()
                             .scaledToFill()
-                            .frame(height: 273)
+                            .frame(width: UIScreen.main.bounds.width * 0.96, height: UIScreen.main.bounds.height * 0.3)
+                            .cornerRadius(16)
                             .clipped()
-                            .cornerRadius(8)
-                            .padding(.horizontal)
+                            .tag(photoName)
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
-                .frame(height: 273)
+                .frame(height: UIScreen.main.bounds.height * 0.3)
                 
                 // Address and Phone
                 VStack(alignment: .leading, spacing: 8) {
@@ -103,8 +103,10 @@ struct PlaceView: View {
             // Footer Buttons
             VStack {
                 HStack(spacing: 16) {
+                    
+                    //MARK: Route Action
                     Button(action: {
-                        //TODO: Route action
+                        showingOptions = true
                     }) {
                         HStack {
                             Text("Маршрут")
@@ -120,31 +122,34 @@ struct PlaceView: View {
                         .background(Color.Paws.Constant.uiAccent)
                         .cornerRadius(9)
                     }
+                    .actionSheet(isPresented: $showingOptions) {
+                                ActionSheet(
+                                    title: Text("Выберите приложение"),
+                                    buttons: viewModel.availableMapsButtons()
+                                )
+                            }
                     
-                    Button(action: {
-                        //TODO: Call action
-                    }) {
-                        Image(systemName: "phone.arrow.up.right")
-                            .resizable()
-                            .padding(.all, 12)
-                            .scaledToFit()
-                            .frame(width: 47, height: 47)
-                            .background(Color.Paws.Background.buttonBackground)
-                            .foregroundColor(Color.Paws.Constant.uiAccent)
-                            .cornerRadius(9)
+                    //MARK: Call Action
+                    if viewModel.place.type == .clinic {
+                        Button(action: {
+                            let clinic = viewModel.place as! ClinicModel
+                            let sanitizedPhone = clinic.phoneNumber.filter { "0123456789+".contains($0) }
+                            if let url = URL(string: "tel://\(sanitizedPhone)"), UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url)
+                            }
+                        }) {
+                            Image(systemName: "phone.arrow.up.right")
+                                .resizable()
+                                .padding(.all, 12)
+                                .scaledToFit()
+                                .frame(width: 47, height: 47)
+                                .background(Color.Paws.Background.buttonBackground)
+                                .foregroundColor(Color.Paws.Constant.uiAccent)
+                                .cornerRadius(9)
+                        }
                     }
-                    Button(action: {
-                        //TODO: Web action
-                    }) {
-                        Image(systemName: "globe")
-                            .resizable()
-                            .padding(.all, 12)
-                            .scaledToFit()
-                            .frame(width: 47, height: 47)
-                            .background(Color.Paws.Background.buttonBackground)
-                            .foregroundColor(Color.Paws.Constant.uiAccent)
-                            .cornerRadius(9)
-                    }
+                    
+                    //MARK: Add Remind Action
                     Button(action: {
                         isAddingSpend.toggle()
                     }) {
@@ -169,6 +174,7 @@ struct PlaceView: View {
                 }
                 .padding()
             }
+            
             .background {
                 Rectangle()
                     .fill(Color.Paws.Background.background)
